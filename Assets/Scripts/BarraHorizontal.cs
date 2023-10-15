@@ -22,7 +22,7 @@ public class BarraHorizontal : MonoBehaviour
 
     public bool porcentajeVer;
 
-    public int porcentaje;
+    public int vidaEnPorcentaje;
 
     public TextMeshProUGUI texto;
 
@@ -38,7 +38,7 @@ public class BarraHorizontal : MonoBehaviour
         if (porcentajeVer)
         {
             float num = vidaActual / vidaMaxima;
-            int vidaEnPorcentaje = 0;
+
             if (num < mitad)
             {
                 vidaEnPorcentaje = Mathf.RoundToInt(num * 100f); 
@@ -47,8 +47,7 @@ public class BarraHorizontal : MonoBehaviour
             {
                 vidaEnPorcentaje = Mathf.FloorToInt(num * 100f); 
             }
- 
-            porcentaje = vidaEnPorcentaje;
+
             texto.text = "Progreso del proyecto: " + vidaEnPorcentaje.ToString("D2") + " %";
         }
 
