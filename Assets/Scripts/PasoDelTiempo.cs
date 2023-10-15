@@ -11,9 +11,10 @@ public class PasoDelTiempo : MonoBehaviour
     const int horasTieneUnDia = 24;
     const int minutosTieneUnaHora = 60;
 
-    public int diasDelJuego = 0;
-    public int horasDelJuego = 0;
-    public int minutosDelJuego = 0;
+    public int diasDelJuego;
+    public int horasDelJuego;
+    public int minutosDelJuego;
+
     public float tiempoRealPorMinuto;
     public TextMeshProUGUI diaText;
     public TextMeshProUGUI textHoraActual;
