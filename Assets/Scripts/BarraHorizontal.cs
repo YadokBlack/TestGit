@@ -20,20 +20,15 @@ public class BarraHorizontal : MonoBehaviour
 
     public int porcentaje;
 
-    // public float porcentaje;
-
     public TextMeshProUGUI texto;
 
-    // Start is called before the first frame update
     void Awake()
     {
         ancho = fondo.rectTransform.rect.width;
 
-        // asigna un valor actual para la barra de progreso
         vidaActual = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (porcentajeVer)
@@ -42,20 +37,17 @@ public class BarraHorizontal : MonoBehaviour
             int vidaEnPorcentaje = 0;
             if (num < .5f)
             {
-                vidaEnPorcentaje = Mathf.RoundToInt(num * 100f); // Redondear a un número entero
+                vidaEnPorcentaje = Mathf.RoundToInt(num * 100f); 
             }
             else
             {
-                vidaEnPorcentaje = Mathf.FloorToInt(num * 100f); // Redondear hacia abajo a un número entero
+                vidaEnPorcentaje = Mathf.FloorToInt(num * 100f); 
             }
  
             porcentaje = vidaEnPorcentaje;
             texto.text = "Progreso del proyecto: " + vidaEnPorcentaje.ToString("D2") + " %";
-
-           //  Debug.Log("Vida:" + vidaActual + " Max:" + vidaMaxima);
         }
 
-        //  barraVida.rectTransform.offsetMin = new Vector2(barraVida.rectTransform.offsetMin.x, vidaActual / vidaMaxima * altura);
         barraVida.rectTransform.offsetMin = new Vector2( vidaActual / vidaMaxima * ancho, barraVida.rectTransform.offsetMin.y);
     }
 }
