@@ -6,6 +6,9 @@ public class CambioColorLuz : MonoBehaviour
 
     public PasoDelTiempo tiempo;
 
+    const int horaCambioTardeNoche = 17;
+    const int horasEnUnDia = 24;
+
     [SerializeField]
     private Color colorManyana = new Color(0.741f, 0.925f, 0.964f); 
     [SerializeField]
@@ -20,13 +23,12 @@ public class CambioColorLuz : MonoBehaviour
 
     private void CambiarColorDeLuzDireccional()
     {
-
-        float horaInterpolacion = Mathf.InverseLerp(0, 18, tiempo.horasDelJuego);
+        float horaInterpolacion = Mathf.InverseLerp(0, horaCambioTardeNoche+1, tiempo.horasDelJuego);
         Color colorActual = Color.Lerp(colorManyana, colorTarde, horaInterpolacion);
 
-        if (tiempo.horasDelJuego > 17)
+        if (tiempo.horasDelJuego > horaCambioTardeNoche)
         {
-            horaInterpolacion = Mathf.InverseLerp(17, 24, tiempo.horasDelJuego);
+            horaInterpolacion = Mathf.InverseLerp(horaCambioTardeNoche, horasEnUnDia, tiempo.horasDelJuego);
 
             colorActual = Color.Lerp(colorTarde, colorNoche, horaInterpolacion);
         }
