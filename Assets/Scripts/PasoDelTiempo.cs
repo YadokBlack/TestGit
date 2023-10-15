@@ -28,8 +28,6 @@ public class PasoDelTiempo : MonoBehaviour
 
     public float tiempoEspera = 2f;
 
-    public Light luzDireccional;
-
     private bool pausa;
 
     public Desorden objetosJuego;
