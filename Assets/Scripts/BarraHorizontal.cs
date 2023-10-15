@@ -18,7 +18,7 @@ public class BarraHorizontal : MonoBehaviour
 
     public float vidaMaxima;
 
-    public float ancho;
+    private float ancho;
 
     public bool porcentajeVer;
 
