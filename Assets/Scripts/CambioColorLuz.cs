@@ -7,11 +7,11 @@ public class CambioColorLuz : MonoBehaviour
     public PasoDelTiempo tiempo;
 
     [SerializeField]
-    private Color colorManyana = new Color(0.741f, 0.925f, 0.964f); // Azul claro para la mañana
+    private Color colorManyana = new Color(0.741f, 0.925f, 0.964f); 
     [SerializeField]
-    private Color colorTarde = new Color(0.898f, 0.824f, 0.608f);  // Naranja para la tarde
+    private Color colorTarde = new Color(0.898f, 0.824f, 0.608f); 
     [SerializeField]
-    private Color colorNoche = new Color(0.098f, 0.180f, 0.416f);  // Azul oscuro para la noche
+    private Color colorNoche = new Color(0.098f, 0.180f, 0.416f);  
 
     private void Update()
     {
