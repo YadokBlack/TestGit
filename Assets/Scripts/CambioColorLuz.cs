@@ -6,6 +6,11 @@ public class CambioColorLuz : MonoBehaviour
 
     public PasoDelTiempo tiempo;
 
+    private void Update()
+    {
+        CambiarColorDeLuzDireccional();
+    }
+
     private void CambiarColorDeLuzDireccional()
     {
         Color colorManana = new Color(0.741f, 0.925f, 0.964f); // Azul claro para la mañana
