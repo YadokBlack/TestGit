@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Rendering;
 
-public class ControladorDeHora : MonoBehaviour
+public class PasoDelTiempo : MonoBehaviour
 {
     public int diasDelJuego = 0;
     public int horasDelJuego = 0;
