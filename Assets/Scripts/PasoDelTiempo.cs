@@ -8,6 +8,9 @@ public class PasoDelTiempo : MonoBehaviour
     public int horaInicio = 7;
     public int minutoInicio = 0;
 
+    const int horasTieneUnDia = 24;
+    const int minutosTieneUnaHora = 60;
+
     public int diasDelJuego = 0;
     public int horasDelJuego = 0;
     public int minutosDelJuego = 0;
@@ -51,7 +54,6 @@ public class PasoDelTiempo : MonoBehaviour
         pausa = false;
     }
 
-
     private void Update()
     {
         if (pausa) return;
@@ -63,11 +65,11 @@ public class PasoDelTiempo : MonoBehaviour
             if (tiempoPasadoDesdeUltimaActualizacion >= tiempoRealPorMinuto)
             {
                 minutosDelJuego++;
-                if (minutosDelJuego >= 60)
+                if (minutosDelJuego >= minutosTieneUnaHora)
                 {
                     minutosDelJuego = 0;
                     horasDelJuego++;
-                    if (horasDelJuego >= 24)
+                    if (horasDelJuego >= horasTieneUnDia)
                     {
                         horasDelJuego = 0;                       
                     }
@@ -139,7 +141,6 @@ public class PasoDelTiempo : MonoBehaviour
 
     private void CambiarColorDeLuzDireccional()
     {
-
         Color colorManana = new Color(0.741f, 0.925f, 0.964f); // Azul claro para la mañana
         Color colorTarde = new Color(0.898f, 0.824f, 0.608f);  // Naranja para la tarde
         Color colorNoche = new Color(0.098f, 0.180f, 0.416f);  // Azul oscuro para la noche
