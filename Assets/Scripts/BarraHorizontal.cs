@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class BarraHorizontal : MonoBehaviour
 {
+    const float mitad = 0.5f;
+
     public Image barraVida;
 
     public Image fondo;
@@ -35,7 +37,7 @@ public class BarraHorizontal : MonoBehaviour
         {
             float num = vidaActual / vidaMaxima;
             int vidaEnPorcentaje = 0;
-            if (num < .5f)
+            if (num < mitad)
             {
                 vidaEnPorcentaje = Mathf.RoundToInt(num * 100f); 
             }
