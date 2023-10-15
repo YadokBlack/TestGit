@@ -4,6 +4,10 @@ using UnityEngine.Rendering;
 
 public class PasoDelTiempo : MonoBehaviour
 {
+    public int diaInicio = 1;
+    public int horaInicio = 7;
+    public int minutoInicio = 0;
+
     public int diasDelJuego = 0;
     public int horasDelJuego = 0;
     public int minutosDelJuego = 0;
@@ -30,9 +34,9 @@ public class PasoDelTiempo : MonoBehaviour
 
     private void Awake()
     {
-        diasDelJuego = 1;
-        horasDelJuego = 7;
-        minutosDelJuego= 0;
+        diasDelJuego = diaInicio;
+        horasDelJuego = horaInicio;
+        minutosDelJuego= minutoInicio;
 
         pausa = true;
     }
