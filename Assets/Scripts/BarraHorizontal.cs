@@ -12,7 +12,7 @@ public class BarraHorizontal : MonoBehaviour
 
     public Image barraVida;
 
-    public Image fondo;
+    public Image imagenFondoBarra;
 
     public float vidaActual;
 
@@ -28,7 +28,7 @@ public class BarraHorizontal : MonoBehaviour
 
     void Awake()
     {
-        ancho = fondo.rectTransform.rect.width;
+        ancho = imagenFondoBarra.rectTransform.rect.width;
 
         vidaActual = valorInicialVida;
     }
