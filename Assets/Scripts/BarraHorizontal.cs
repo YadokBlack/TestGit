@@ -18,7 +18,7 @@ public class BarraHorizontal : MonoBehaviour
 
     public float vidaMaxima;
 
-    private float ancho;
+    private float anchoImagenFondoBarra;
 
     public bool porcentajeVer;
 
@@ -28,7 +28,7 @@ public class BarraHorizontal : MonoBehaviour
 
     void Awake()
     {
-        ancho = imagenFondoBarra.rectTransform.rect.width;
+        anchoImagenFondoBarra = imagenFondoBarra.rectTransform.rect.width;
 
         vidaActual = valorInicialVida;
     }
@@ -51,6 +51,6 @@ public class BarraHorizontal : MonoBehaviour
             texto.text = "Progreso del proyecto: " + vidaEnPorcentaje.ToString("D2") + " %";
         }
 
-        barraVida.rectTransform.offsetMin = new Vector2( vidaActual / vidaMaxima * ancho, barraVida.rectTransform.offsetMin.y);
+        barraVida.rectTransform.offsetMin = new Vector2( vidaActual / vidaMaxima * anchoImagenFondoBarra, barraVida.rectTransform.offsetMin.y);
     }
 }
