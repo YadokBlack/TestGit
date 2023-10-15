@@ -8,6 +8,8 @@ public class BarraHorizontal : MonoBehaviour
 {
     const float mitad = 0.5f;
 
+    public float valorInicialVida = 0;
+
     public Image barraVida;
 
     public Image fondo;
@@ -28,7 +30,7 @@ public class BarraHorizontal : MonoBehaviour
     {
         ancho = fondo.rectTransform.rect.width;
 
-        vidaActual = 0;
+        vidaActual = valorInicialVida;
     }
 
     void Update()
