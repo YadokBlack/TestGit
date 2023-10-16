@@ -114,7 +114,7 @@ public class AccionTrabajar : MonoBehaviour
 
                 zonaControlada.mensajeZona = mensajeInteraccion;
 
-                control.AumentaTiempo(costeTiempo);
+                reloj.AumentaTiempo(costeTiempo);
                 condicion.CambioEstado(beneficios);
                 if (objetoDestacado != null && !enTransicion)
                 {
