@@ -9,20 +9,15 @@ public class BarraHorizontal : MonoBehaviour
     const float mitad = 0.5f;
 
     public float valorInicialVida = 0;
+    public float vidaActual;
+    public float vidaMaxima;
+    public int vidaEnPorcentaje;
+    public bool porcentajeVer;
 
     public Image barraVida;
 
     public Image imagenFondoBarra;
-
-    public float vidaActual;
-
-    public float vidaMaxima;
-
     private float anchoImagenFondoBarra;
-
-    public bool porcentajeVer;
-
-    public int vidaEnPorcentaje;
 
     public TextMeshProUGUI texto;
 
