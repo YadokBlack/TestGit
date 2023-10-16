@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Acciones : MonoBehaviour
 {
+    private const float TiempoCompleto = 1.0f;
+
     public KeyCode teclaAccion = KeyCode.E;
 
     public int costeTiempo = 5;
@@ -53,10 +55,8 @@ public class Acciones : MonoBehaviour
         {           
             MeshRenderer meshRenderer = hijo.GetComponent<MeshRenderer>();
             if (meshRenderer != null)
-            {
-                
+            {                
                 float alturaHijo = hijo.localPosition.y + (meshRenderer.bounds.size.y * 0.5f);
-
                 
                 alturaMaxima = Mathf.Max(alturaMaxima, alturaHijo);
             }
@@ -80,7 +80,7 @@ public class Acciones : MonoBehaviour
 
             objetoDestacado.transform.localScale = Vector3.Lerp(escalaOriginal, escalaDeseada, fraccionDeTiempo);
 
-            if (fraccionDeTiempo == 1f)
+            if (fraccionDeTiempo == TiempoCompleto)
             {
                 enTransicion = false;
             }
