@@ -39,7 +39,7 @@ public class AccionTrabajar : MonoBehaviour
     public ControlZonas zonaControl;
     public ZonaDeColision zonaControlada;
 
-    public PasoDelTiempo control;
+    public PasoDelTiempo reloj;
 
     public Condicion condicion;
 
