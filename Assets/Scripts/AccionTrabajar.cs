@@ -101,7 +101,7 @@ public class AccionTrabajar : MonoBehaviour
 
     void Update()
     {
-        if (zonaControl.jugadorEnZona && zonaControl.nombreZonaJugador == zonaControlada.name && !control.pantallaNegra && !haGanado)
+        if (zonaControl.jugadorEnZona && zonaControl.nombreZonaJugador == zonaControlada.name && !reloj.pantallaNegra && !haGanado)
         {
             if (Input.GetKeyDown(teclaAccion) &&
                 condicion.sed < 100 &&
