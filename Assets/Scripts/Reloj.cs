@@ -8,16 +8,10 @@ public class Reloj : MonoBehaviour
 {
 
     [Tooltip("Donde se muestra")]
-    // public Text currentTime;
+
     public TextMeshProUGUI currentTime;
 
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         currentTime.color = Color.red;
