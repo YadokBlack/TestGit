@@ -26,7 +26,7 @@ public class Acciones : MonoBehaviour
     public ZonaDeColision zonaControlada;
 
     // para controlar cuando pasa el dia
-    public ControladorDeHora control;
+    public PasoDelTiempo control;
 
     // para poder acceder a los estados del jugador
     public Condicion condicion;
