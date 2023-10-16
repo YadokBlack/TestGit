@@ -93,7 +93,7 @@ public class Acciones : MonoBehaviour
 
     void Update()
     {
-        if (zonaControl.jugadorEnZona && zonaControl.nombreZonaJugador == zonaControlada.name && !control.pantallaNegra)
+        if (zonaControl.jugadorEnZona && zonaControl.nombreZonaJugador == zonaControlada.name && !reloj.pantallaNegra)
         {
             if (Input.GetKeyDown(teclaAccion))
             {
