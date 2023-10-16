@@ -16,9 +16,9 @@ public class PasoDelTiempo : MonoBehaviour
     public int minutosDelJuego;
 
     public float tiempoRealPorMinuto;
-    public TextMeshProUGUI diaText;
+    public TextMeshProUGUI textDia;
     public TextMeshProUGUI textHoraActual;
-    public TextMeshProUGUI relojPC;
+    public TextMeshProUGUI textRelojPC;
     public TextMeshProUGUI textosDias;
     public GameObject fondoNegro;
 
@@ -131,9 +131,9 @@ public class PasoDelTiempo : MonoBehaviour
 
         int quedanDias = diasTopeJuego - diasDelJuego; 
 
-        diaText.text = quedanDias.ToString("D2") + " DIAS";
+        textDia.text = quedanDias.ToString("D2") + " DIAS";
 
-        relojPC.text = horaFormato24;
+        textRelojPC.text = horaFormato24;
     }
 
 
