@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Acciones : MonoBehaviour
 {
-    private const float TiempoCompleto = 1.0f;
+    private const float tiempoCompleto = 1.0f;
 
     public KeyCode teclaAccion = KeyCode.E;
 
@@ -24,7 +24,7 @@ public class Acciones : MonoBehaviour
     public ControlZonas zonaControl;
     public ZonaDeColision zonaControlada;
 
-    public PasoDelTiempo control;
+    public PasoDelTiempo reloj;
 
     public Condicion condicion;
 
@@ -80,7 +80,7 @@ public class Acciones : MonoBehaviour
 
             objetoDestacado.transform.localScale = Vector3.Lerp(escalaOriginal, escalaDeseada, fraccionDeTiempo);
 
-            if (fraccionDeTiempo == TiempoCompleto)
+            if (fraccionDeTiempo == tiempoCompleto)
             {
                 enTransicion = false;
             }
@@ -99,7 +99,7 @@ public class Acciones : MonoBehaviour
             {
                 accionTrabajo.teclasPulsadas++;
 
-                control.AumentaTiempo(costeTiempo);
+                reloj.AumentaTiempo(costeTiempo);
                 condicion.CambioEstado(beneficios);
                 if (objetoDestacado != null && !enTransicion)
                 {                   
