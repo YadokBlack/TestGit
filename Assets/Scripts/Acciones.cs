@@ -8,10 +8,8 @@ public class Acciones : MonoBehaviour
 {
     public KeyCode teclaAccion = KeyCode.E;
 
-
     public int costeTiempo = 5;
     public float[] beneficios = null;
-
 
     public GameObject objetoDestacado;
     public Vector3 posicionObjeto;
@@ -21,16 +19,12 @@ public class Acciones : MonoBehaviour
     public float duracionTransicion = 0.30f;
     public float escalaPorcentaje;
 
-
     public ControlZonas zonaControl;
     public ZonaDeColision zonaControlada;
 
-
     public PasoDelTiempo control;
 
-
     public Condicion condicion;
-
 
     [SerializeField]
     private GameObject pantalla;
@@ -46,19 +40,7 @@ public class Acciones : MonoBehaviour
     {
         if (objetoDestacado != null)
         {
-            escalaOriginal = objetoDestacado.transform.localScale;
-
-
-            
-
-            
-           
-            
-
-            
-
-            
-             
+            escalaOriginal = objetoDestacado.transform.localScale; 
         }
         enTransicion = false;
     }
@@ -68,8 +50,7 @@ public class Acciones : MonoBehaviour
         float alturaObjetoPadre = 0f;
 
         foreach (Transform hijo in objetoPadre)
-        {
-            
+        {           
             MeshRenderer meshRenderer = hijo.GetComponent<MeshRenderer>();
             if (meshRenderer != null)
             {
@@ -80,26 +61,19 @@ public class Acciones : MonoBehaviour
                 alturaMaxima = Mathf.Max(alturaMaxima, alturaHijo);
             }
 
-            
             float alturaHijoRecursiva = ObtenerAlturaMaxima(hijo);
 
-            
             alturaMaxima = Mathf.Max(alturaMaxima, alturaHijoRecursiva);
 
-            
             alturaObjetoPadre = Mathf.Max(alturaObjetoPadre, alturaHijoRecursiva);
         }
-
-        
         return alturaObjetoPadre;
     }
-
 
     public void AnimacionAgrandar()
     {
         if (enTransicion)
-        {
-            
+        { 
             float tiempoTranscurrido = Time.time - tiempoInicioTransicion;
             float fraccionDeTiempo = Mathf.Clamp01(tiempoTranscurrido / duracionTransicion);
             Vector3 escalaDeseada = escalaOriginal * escalaPorcentaje;
@@ -113,15 +87,12 @@ public class Acciones : MonoBehaviour
         }
         if (!enTransicion && objetoDestacado != null)
         {
-            
             objetoDestacado.transform.localScale = escalaOriginal;
         }
     }
 
-
     void Update()
     {
-
         if (zonaControl.jugadorEnZona && zonaControl.nombreZonaJugador == zonaControlada.name && !control.pantallaNegra)
         {
             if (Input.GetKeyDown(teclaAccion))
@@ -131,15 +102,13 @@ public class Acciones : MonoBehaviour
                 control.AumentaTiempo(costeTiempo);
                 condicion.CambioEstado(beneficios);
                 if (objetoDestacado != null && !enTransicion)
-                {
-                    
+                {                   
                     enTransicion = true;
                     tiempoInicioTransicion = Time.time;
                 }
 
                 if (audioManager != null)
-                {
-                    
+                {                    
                     audioManager.PlayAudioByIndex(numClip);
                 }                
             }
@@ -163,5 +132,3 @@ public class Acciones : MonoBehaviour
         Gizmos.DrawSphere(posicionObjeto, 0.01f); // Dibujar un punto en la posición deseada
     }
 }
-
-
