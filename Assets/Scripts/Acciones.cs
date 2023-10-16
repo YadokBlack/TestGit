@@ -8,6 +8,8 @@ public class Acciones : MonoBehaviour
 {
     private const float tiempoCompleto = 1.0f;
 
+    public Color colorPunto = Color.red;
+
     public KeyCode teclaAccion = KeyCode.E;
 
     public int costeTiempo = 5;
@@ -128,7 +130,7 @@ public class Acciones : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red; // Color del punto
+        Gizmos.color = colorPunto; // Color del punto
         Gizmos.DrawSphere(posicionObjeto, 0.01f); // Dibujar un punto en la posición deseada
     }
 }
