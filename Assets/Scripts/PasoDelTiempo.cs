@@ -79,8 +79,6 @@ public class PasoDelTiempo : MonoBehaviour
 
             ActualizarHoraEnFormato24();
 
-            CambiarColorDeLuzDireccional();
-
             if (horasDelJuego >= 23)
             {
                 pantallaNegra = true;                
