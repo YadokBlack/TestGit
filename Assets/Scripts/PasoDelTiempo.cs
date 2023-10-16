@@ -124,7 +124,7 @@ public class PasoDelTiempo : MonoBehaviour
         string horaFormato24 = horasDelJuego.ToString("D2") + ":" + minutosDelJuego.ToString("D2");
 
         int horasFaltan = 22 - horasDelJuego;
-        int minutosFaltan = 60 - minutosDelJuego;
+        int minutosFaltan = minutosTieneUnaHora - minutosDelJuego;
 
         string quedanHoras = horasFaltan.ToString("D2") + ":" + minutosFaltan.ToString("D2");
         textHoraActual.text = quedanHoras;
