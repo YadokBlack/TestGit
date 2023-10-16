@@ -79,7 +79,7 @@ public class PasoDelTiempo : MonoBehaviour
 
             ActualizarHoraEnFormato24();
 
-            if (horasDelJuego >= 23)
+            if (horasDelJuego >= horasTieneUnDia - 1 )
             {
                 pantallaNegra = true;                
                 textosDias.text = "DIA - " + diasDelJuego;
