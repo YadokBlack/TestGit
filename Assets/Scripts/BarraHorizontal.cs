@@ -31,22 +31,22 @@ public class BarraHorizontal : MonoBehaviour
 
     void Update()
     {
-        if (porcentajeVer)
-        {
-            float num = vidaActual / vidaMaxima;
+        float proporcionVida = vidaActual / vidaMaxima;
 
-            if (num < mitad)
+        if (porcentajeVer)
+        {            
+            if (proporcionVida < mitad)
             {
-                vidaEnPorcentaje = Mathf.RoundToInt(num * porcentajeMaximo); 
+                vidaEnPorcentaje = Mathf.RoundToInt(proporcionVida * porcentajeMaximo); 
             }
             else
             {
-                vidaEnPorcentaje = Mathf.FloorToInt(num * porcentajeMaximo); 
+                vidaEnPorcentaje = Mathf.FloorToInt(proporcionVida * porcentajeMaximo); 
             }
 
             mensajeProgreso.text = "Progreso del proyecto: " + vidaEnPorcentaje.ToString("D2") + " %";
         }
 
-        barraVida.rectTransform.offsetMin = new Vector2( vidaActual / vidaMaxima * anchoImagenFondoBarra, barraVida.rectTransform.offsetMin.y);
+        barraVida.rectTransform.offsetMin = new Vector2( proporcionVida * anchoImagenFondoBarra, barraVida.rectTransform.offsetMin.y);
     }
 }
