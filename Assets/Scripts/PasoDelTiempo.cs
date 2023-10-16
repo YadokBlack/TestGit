@@ -19,8 +19,8 @@ public class PasoDelTiempo : MonoBehaviour
     public TextMeshProUGUI diaText;
     public TextMeshProUGUI textHoraActual;
     public TextMeshProUGUI relojPC;
-    public GameObject fondoNegro;
     public TextMeshProUGUI textosDias;
+    public GameObject fondoNegro;
 
     private float tiempoPasadoDesdeUltimaActualizacion = 0.0f;
     public bool pantallaNegra = false;
