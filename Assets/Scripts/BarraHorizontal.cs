@@ -13,7 +13,7 @@ public class BarraHorizontal : MonoBehaviour
     public float vidaActual;
     public float vidaMaxima;
     public int vidaEnPorcentaje;
-    public bool porcentajeVer;
+    public bool verPorcentaje;
 
     public Image barraVida;
 
@@ -33,7 +33,7 @@ public class BarraHorizontal : MonoBehaviour
     {
         float proporcionVida = vidaActual / vidaMaxima;
 
-        if (porcentajeVer)
+        if (verPorcentaje)
         {            
             if (proporcionVida < mitad)
             {
