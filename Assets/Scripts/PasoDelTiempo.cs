@@ -108,7 +108,7 @@ public class PasoDelTiempo : MonoBehaviour
     {
         minutosDelJuego += minutos;
 
-        if (minutosDelJuego >= minutosTieneUnaHora)
+        while (minutosDelJuego >= minutosTieneUnaHora)
         {
             minutosDelJuego -= minutosTieneUnaHora;
             horasDelJuego++;
