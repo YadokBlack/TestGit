@@ -19,7 +19,7 @@ public class BarraHorizontal : MonoBehaviour
     public Image imagenFondoBarra;
     private float anchoImagenFondoBarra;
 
-    public TextMeshProUGUI texto;
+    public TextMeshProUGUI mensajeProgreso;
 
     void Awake()
     {
@@ -43,7 +43,7 @@ public class BarraHorizontal : MonoBehaviour
                 vidaEnPorcentaje = Mathf.FloorToInt(num * 100f); 
             }
 
-            texto.text = "Progreso del proyecto: " + vidaEnPorcentaje.ToString("D2") + " %";
+            mensajeProgreso.text = "Progreso del proyecto: " + vidaEnPorcentaje.ToString("D2") + " %";
         }
 
         barraVida.rectTransform.offsetMin = new Vector2( vidaActual / vidaMaxima * anchoImagenFondoBarra, barraVida.rectTransform.offsetMin.y);
