@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class BarraHorizontal : MonoBehaviour
 {
     const float mitad = 0.5f;
+    const int porcentajeMaximo = 100;
 
     public float valorInicialVida = 0;
     public float vidaActual;
@@ -36,11 +37,11 @@ public class BarraHorizontal : MonoBehaviour
 
             if (num < mitad)
             {
-                vidaEnPorcentaje = Mathf.RoundToInt(num * 100f); 
+                vidaEnPorcentaje = Mathf.RoundToInt(num * porcentajeMaximo); 
             }
             else
             {
-                vidaEnPorcentaje = Mathf.FloorToInt(num * 100f); 
+                vidaEnPorcentaje = Mathf.FloorToInt(num * porcentajeMaximo); 
             }
 
             mensajeProgreso.text = "Progreso del proyecto: " + vidaEnPorcentaje.ToString("D2") + " %";
