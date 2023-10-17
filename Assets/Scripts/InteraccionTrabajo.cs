@@ -30,7 +30,7 @@ public class InteraccionTrabajo : MonoBehaviour
 
     public GameObject victoria;
 
-    public ControladorDeHora control;
+    public PasoDelTiempo control;
 
     public Condicion condicion;
 
