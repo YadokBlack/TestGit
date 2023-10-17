@@ -107,7 +107,7 @@ public class Condicion : MonoBehaviour
             sed += beneficios[2];
             cansancio += beneficios[3];
 
-            ComprobarEstados();
+            AcotarEstados();
         }
     }
 
@@ -118,32 +118,4 @@ public class Condicion : MonoBehaviour
         sed = Mathf.Clamp(sed, 0, 100);
         cansancio = Mathf.Clamp(cansancio, 0, 100);
     }
-
-    private void ComprobarEstados()
-    {
-        /*
-        if ( estres >= 100 )
-        {
-            // tiene mucho estres
-            cansancio += Random.Range(1.1f, aumentoAleatorio);
-        }
-        if ( hambre >= 100)
-        {
-            // mucha hambre
-            estres += Random.Range(1.1f, aumentoAleatorio);
-        }
-        if( sed >= 100)
-        {
-            // mucha sed
-            hambre += Random.Range(1.1f, aumentoAleatorio);
-        }
-        if( cansancio >= 100)
-        {
-            // muy cansado
-            sed += Random.Range(1.1f, aumentoAleatorio);
-        }
-        */
-        AcotarEstados();
-    }
-
 }
