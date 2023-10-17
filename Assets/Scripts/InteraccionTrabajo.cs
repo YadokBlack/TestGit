@@ -31,7 +31,7 @@ public class InteraccionTrabajo : MonoBehaviour
 
     public GameObject victoria;
 
-    public PasoDelTiempo control;
+    public PasoDelTiempo reloj;
 
     public Condicion condicion;
 
@@ -90,7 +90,7 @@ public class InteraccionTrabajo : MonoBehaviour
 
     void Update()
     {
-        if (estaColisionando && !control.pantallaNegra && !haGanado )
+        if (estaColisionando && !reloj.pantallaNegra && !haGanado )
         {            
             panel.SetActive(true);
             textMeshPro.text = mensajeInteraccion;
@@ -129,7 +129,7 @@ public class InteraccionTrabajo : MonoBehaviour
                     victoria.SetActive(true);
                     pantalla.SetActive(false);
                     pantallaFin.SetActive(true);
-                    control.Pausar();
+                    reloj.Pausar();
                     haGanado = true;
                 }
             }
