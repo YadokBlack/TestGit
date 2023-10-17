@@ -4,15 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-/*  Controla la condicion del jugador
- *  
- *  niveles de estres, hambre, sed, cansancio
- */
-
 public class Condicion : MonoBehaviour
 {
-    // todos los niveles considero que tienen un maximo de 100
-
     public float estres;
     public Image barraVidaEstres;
     public Image fondoEstres;
@@ -30,11 +23,10 @@ public class Condicion : MonoBehaviour
     public Image fondoCansancio;
     public float alturaC;
 
-    // Variables para controlar el tiempo entre cambios de estado
-    public float tiempoEntreCambioEstres = 10f;  // Cambia cada 10 segundos
-    public float tiempoEntreCambioHambre = 15f;  // Cambia cada 15 segundos
-    public float tiempoEntreCambioSed = 20f;     // Cambia cada 20 segundos
-    public float tiempoEntreCambioCansancio = 30f; // Cambia cada 30 segundos
+    public float tiempoEntreCambioEstres = 10f;  
+    public float tiempoEntreCambioHambre = 15f;  
+    public float tiempoEntreCambioSed = 20f;     
+    public float tiempoEntreCambioCansancio = 30f; 
 
     private float tiempoUltimoCambioEstres;
     private float tiempoUltimoCambioHambre;
@@ -59,7 +51,6 @@ public class Condicion : MonoBehaviour
 
         Debug.Log(" C" + alturaC + " E" + alturaE + " S" + alturaS + " H" + alturaH);
 
-        // Inicializa los tiempos de cambio
         tiempoUltimoCambioEstres = Time.time;
         tiempoUltimoCambioHambre = Time.time;
         tiempoUltimoCambioSed = Time.time;
@@ -68,7 +59,6 @@ public class Condicion : MonoBehaviour
 
     private void Update()
     {
-        // Calcula el tiempo actual
         float tiempoActual = Time.time;
 
         if ( control.pantallaNegra )
@@ -77,46 +67,37 @@ public class Condicion : MonoBehaviour
             estres -= 5f;
         }
 
-
-        // Verifica si es hora de cambiar el estado de estrés
         if (tiempoActual - tiempoUltimoCambioEstres >= tiempoEntreCambioEstres)
         {
-            estres += 1 + Random.Range(0.1f, aumentoAleatorio);  // Incrementa el estrés
-            tiempoUltimoCambioEstres = tiempoActual;  // Actualiza el tiempo del último cambio
+            estres += 1 + Random.Range(0.1f, aumentoAleatorio);  
+            tiempoUltimoCambioEstres = tiempoActual;  
         }
 
-        // Verifica si es hora de cambiar el estado de hambre
         if (tiempoActual - tiempoUltimoCambioHambre >= tiempoEntreCambioHambre)
         {
-            hambre += 1 + Random.Range(0.1f, aumentoAleatorio);  // Incrementa el hambre
-            tiempoUltimoCambioHambre = tiempoActual;  // Actualiza el tiempo del último cambio
+            hambre += 1 + Random.Range(0.1f, aumentoAleatorio);  
+            tiempoUltimoCambioHambre = tiempoActual;  
         }
 
-        // Verifica si es hora de cambiar el estado de sed
         if (tiempoActual - tiempoUltimoCambioSed >= tiempoEntreCambioSed)
         {
-            sed += 1 + Random.Range(0.1f, aumentoAleatorio);  // Incrementa la sed
-            tiempoUltimoCambioSed = tiempoActual;  // Actualiza el tiempo del último cambio
+            sed += 1 + Random.Range(0.1f, aumentoAleatorio); 
+            tiempoUltimoCambioSed = tiempoActual;  
         }
 
-        // Verifica si es hora de cambiar el estado de cansancio
         if (tiempoActual - tiempoUltimoCambioCansancio >= tiempoEntreCambioCansancio)
         {
-            cansancio += 1 + Random.Range(0.1f, aumentoAleatorio);  // Incrementa el cansancio
-            tiempoUltimoCambioCansancio = tiempoActual;  // Actualiza el tiempo del último cambio
+            cansancio += 1 + Random.Range(0.1f, aumentoAleatorio); 
+            tiempoUltimoCambioCansancio = tiempoActual;  
         }
 
-        // Asegúrate de que los estados no superen el valor máximo de 100
         AcotarEstados();
-
-       // Debug.Log("Sed : " + sed / 100 * alturaS);
 
         barraVidaSed.rectTransform.offsetMin = new Vector2(barraVidaSed.rectTransform.offsetMin.x, sed / 100 * alturaS);
         barraVidaHambre.rectTransform.offsetMin = new Vector2(barraVidaHambre.rectTransform.offsetMin.x, hambre / 100 * alturaH);
         barraVidaCansancio.rectTransform.offsetMin = new Vector2(barraVidaCansancio.rectTransform.offsetMin.x, cansancio / 100 * alturaC);
         barraVidaEstres.rectTransform.offsetMin = new Vector2(barraVidaEstres.rectTransform.offsetMin.x, estres / 100 * alturaE);
     }
-
     public void CambioEstado(float[] beneficios)
     {
         if ( beneficios != null && beneficios.Length == 4)
