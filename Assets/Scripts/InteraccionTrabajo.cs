@@ -27,7 +27,6 @@ public class InteraccionTrabajo : MonoBehaviour
     public Vector3 posicionParticulas;
 
     public AudioClip sonidoAEjecutar; 
-
     private AudioSource audioSource;
 
     public GameObject victoria;
@@ -37,10 +36,8 @@ public class InteraccionTrabajo : MonoBehaviour
     public Condicion condicion;
 
     public GameObject teclado;
-
     
     public bool haGanado;
-
 
     public GameObject objetoDestacado;
     private Vector3 escalaOriginal;
@@ -69,7 +66,6 @@ public class InteraccionTrabajo : MonoBehaviour
             objetoDestacado.transform.localScale = escalaOriginal;
         }
     }
-
 
     void Awake()
     {
