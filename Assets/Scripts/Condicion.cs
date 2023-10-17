@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Condicion : MonoBehaviour
 {
     public float estres;
-    public Image barraVidaEstres;
+    public Image barraEstres;
     public Image fondoEstres;
     public float alturaE;
     public float hambre;
