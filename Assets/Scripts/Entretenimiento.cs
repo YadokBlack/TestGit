@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Entretenimiento : MonoBehaviour
 {
+    const float tiempoCompleto = 1f;
+
     public string mensajeInteraccion = "Pulsa E para mirar por la ventana";
     public TextMeshProUGUI textMeshPro;
     public GameObject panel;
@@ -42,7 +44,7 @@ public class Entretenimiento : MonoBehaviour
 
             objetoDestacado.transform.localScale = Vector3.Lerp(escalaOriginal, escalaDeseada, fraccionDeTiempo);
 
-            if (fraccionDeTiempo == 1f)
+            if (fraccionDeTiempo == tiempoCompleto)
             {
                 enTransicion = false;
             }
