@@ -9,19 +9,19 @@ public class Condicion : MonoBehaviour
     public float estres;
     public Image barraEstres;
     public Image fondoEstres;
-    public float alturaE;
+    public float alturaEstres;
     public float hambre;
     public Image barraHambre;
     public Image fondoHambre;
-    public float alturaH;
+    public float alturaHambre;
     public float sed;
     public Image barraSed;
     public Image fondoSed;
-    public float alturaS;
+    public float alturaSed;
     public float cansancio;
     public Image barraCansancio;
     public Image fondoCansancio;
-    public float alturaC;
+    public float alturaCansancio;
 
     public float tiempoEntreCambioEstres = 10f;  
     public float tiempoEntreCambioHambre = 15f;  
@@ -44,12 +44,12 @@ public class Condicion : MonoBehaviour
         sed = 0;
         cansancio = 0;
 
-        alturaC = fondoCansancio.rectTransform.rect.height;
-        alturaE = fondoEstres.rectTransform.rect.height;
-        alturaS = fondoSed.rectTransform.rect.height;
-        alturaH = fondoHambre.rectTransform.rect.height;
+        alturaCansancio = fondoCansancio.rectTransform.rect.height;
+        alturaEstres = fondoEstres.rectTransform.rect.height;
+        alturaSed = fondoSed.rectTransform.rect.height;
+        alturaHambre = fondoHambre.rectTransform.rect.height;
 
-        Debug.Log(" C" + alturaC + " E" + alturaE + " S" + alturaS + " H" + alturaH);
+        Debug.Log(" C" + alturaCansancio + " E" + alturaEstres + " S" + alturaSed + " H" + alturaHambre);
 
         tiempoUltimoCambioEstres = Time.time;
         tiempoUltimoCambioHambre = Time.time;
@@ -93,10 +93,10 @@ public class Condicion : MonoBehaviour
 
         AcotarEstados();
 
-        barraSed.rectTransform.offsetMin = new Vector2(barraSed.rectTransform.offsetMin.x, sed / 100 * alturaS);
-        barraHambre.rectTransform.offsetMin = new Vector2(barraHambre.rectTransform.offsetMin.x, hambre / 100 * alturaH);
-        barraCansancio.rectTransform.offsetMin = new Vector2(barraCansancio.rectTransform.offsetMin.x, cansancio / 100 * alturaC);
-        barraEstres.rectTransform.offsetMin = new Vector2(barraEstres.rectTransform.offsetMin.x, estres / 100 * alturaE);
+        barraSed.rectTransform.offsetMin = new Vector2(barraSed.rectTransform.offsetMin.x, sed / 100 * alturaSed);
+        barraHambre.rectTransform.offsetMin = new Vector2(barraHambre.rectTransform.offsetMin.x, hambre / 100 * alturaHambre);
+        barraCansancio.rectTransform.offsetMin = new Vector2(barraCansancio.rectTransform.offsetMin.x, cansancio / 100 * alturaCansancio);
+        barraEstres.rectTransform.offsetMin = new Vector2(barraEstres.rectTransform.offsetMin.x, estres / 100 * alturaEstres);
     }
     public void CambioEstado(float[] beneficios)
     {
