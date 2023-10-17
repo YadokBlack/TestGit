@@ -33,7 +33,7 @@ public class Condicion : MonoBehaviour
     private float tiempoUltimoCambioSed;
     private float tiempoUltimoCambioCansancio;
 
-    public ControladorDeHora control;
+    public PasoDelTiempo control;
 
     public float aumentoAleatorio;
 
