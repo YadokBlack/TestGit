@@ -63,8 +63,8 @@ public class Condicion : MonoBehaviour
 
         if ( control.pantallaNegra )
         {
-            cansancio -= 5;
-            estres -= 5f;
+            cansancio = 0.0f;
+            estres = 0.0f;
         }
 
         if (tiempoActual - tiempoUltimoCambioEstres >= tiempoEntreCambioEstres)
