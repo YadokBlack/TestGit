@@ -3,6 +3,8 @@ using TMPro;
 
 public class InteraccionTrabajo : MonoBehaviour
 {
+    const int lleno = 100;
+
     public GameObject pantalla;
     public GameObject pantallaFin;
     public GameObject panel;
@@ -98,10 +100,10 @@ public class InteraccionTrabajo : MonoBehaviour
             textMeshPro.text = mensajeInteraccion;
 
             if (Input.GetKeyDown(teclaInteraccion) && 
-                    condicion.sed < 100 && 
-                    condicion.cansancio < 100 &&
-                    condicion.estres < 100 && 
-                    condicion.hambre < 100)
+                    condicion.sed < lleno && 
+                    condicion.cansancio < lleno &&
+                    condicion.estres < lleno && 
+                    condicion.hambre < lleno)
             {
                 if (audioSource != null && sonidoAEjecutar != null)
                 {
@@ -137,32 +139,30 @@ public class InteraccionTrabajo : MonoBehaviour
             }
             else             
             {
-                if (condicion.hambre == 100 || condicion.sed == 100
-                    || condicion.cansancio == 100 || condicion.estres == 100)
+                if (condicion.hambre == lleno || condicion.sed == lleno
+                    || condicion.cansancio == lleno || condicion.estres == lleno)
                 {
                     textMeshPro.text = "Uf";
 
-                    if (condicion.hambre == 100)
+                    if (condicion.hambre == lleno)
                     {
                         textMeshPro.text += ", tengo hambre";
                     }
-                    if (condicion.sed == 100)
+                    if (condicion.sed == lleno)
                     {
                         textMeshPro.text += ", estoy sediento";
                     }
-                    if (condicion.cansancio == 100)
+                    if (condicion.cansancio == lleno)
                     {
                         textMeshPro.text += ", estoy cansado";
                     }
-                    if (condicion.estres == 100)
+                    if (condicion.estres == lleno)
                     {
                         textMeshPro.text += ", me estoy estresando";
                     }
 
                     textMeshPro.text += ", no puedo continuar.";
                 }
-
-
 
                 if (Input.GetKeyUp(teclaInteraccion))
                 {
