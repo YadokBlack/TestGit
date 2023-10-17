@@ -36,9 +36,6 @@ public class Entretenimiento : MonoBehaviour
     {
         if (enTransicion)
         {
-           // Debug.Log("Esta agrandando");
-
-            // vamos a agrandar
             float tiempoTranscurrido = Time.time - tiempoInicioTransicion;
             float fraccionDeTiempo = Mathf.Clamp01(tiempoTranscurrido / duracionTransicion);
             Vector3 escalaDeseada = escalaOriginal * escalaPorcentaje;
@@ -48,17 +45,14 @@ public class Entretenimiento : MonoBehaviour
             if (fraccionDeTiempo == 1f)
             {
                 enTransicion = false;
-                // Debug.Log("Para");
             }
         }
         if (!enTransicion && objetoDestacado != null)
         {
-            // Restaurar el tamaño original del objeto cuando no está agrandándose.
             objetoDestacado.transform.localScale = escalaOriginal;
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         if ( objetoDestacado != null )
@@ -68,14 +62,10 @@ public class Entretenimiento : MonoBehaviour
         enTransicion = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (estaColisionando && !control.pantallaNegra)
         {
-            // Mostrar el mensaje por pantalla
-            // Debug.Log(mensajeInteraccion);
-
             textMeshPro.text = mensajeInteraccion;
 
             if (Input.GetKeyDown(teclaInteraccion))
@@ -84,11 +74,9 @@ public class Entretenimiento : MonoBehaviour
                 condicion.CambioEstado(beneficios);
                 if (objetoDestacado != null && !enTransicion)
                 {
-                  //  Debug.Log("Inicia");
                     enTransicion = true;
                     tiempoInicioTransicion = Time.time;
                 }
-                // Reproduce el sonido cuando se presiona la tecla de interacción.
                 if (audioSource != null)
                 {
                     audioSource.PlayOneShot(sonido);
@@ -104,10 +92,8 @@ public class Entretenimiento : MonoBehaviour
             pantalla.SetActive(false);
         }
     }
-
     void OnTriggerEnter(Collider other)
     {
-        // Comprobar si el objeto que colisiona tiene la etiqueta del jugador
         if (other.CompareTag(tagDelJugador))
         {
             estaColisionando = true;
@@ -117,7 +103,6 @@ public class Entretenimiento : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        // Comprobar si el objeto que sale de la colisión tiene la etiqueta del jugador
         if (other.CompareTag(tagDelJugador))
         {
             estaColisionando = false;
