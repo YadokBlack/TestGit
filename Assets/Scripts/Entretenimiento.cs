@@ -15,7 +15,7 @@ public class Entretenimiento : MonoBehaviour
 
     private bool estaColisionando = false;
 
-    public PasoDelTiempo control;
+    public PasoDelTiempo reloj;
 
     public Condicion condicion;
 
@@ -64,13 +64,13 @@ public class Entretenimiento : MonoBehaviour
 
     void Update()
     {
-        if (estaColisionando && !control.pantallaNegra)
+        if (estaColisionando && !reloj.pantallaNegra)
         {
             textMeshPro.text = mensajeInteraccion;
 
             if (Input.GetKeyDown(teclaInteraccion))
             {
-                control.AumentaTiempo(costeTiempo);
+                reloj.AumentaTiempo(costeTiempo);
                 condicion.CambioEstado(beneficios);
                 if (objetoDestacado != null && !enTransicion)
                 {
