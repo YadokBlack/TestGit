@@ -15,7 +15,7 @@ public class Entretenimiento : MonoBehaviour
 
     private bool estaColisionando = false;
 
-    public ControladorDeHora control;
+    public PasoDelTiempo control;
 
     public Condicion condicion;
 
