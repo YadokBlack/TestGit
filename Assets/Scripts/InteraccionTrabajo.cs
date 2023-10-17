@@ -4,6 +4,7 @@ using TMPro;
 public class InteraccionTrabajo : MonoBehaviour
 {
     const int lleno = 100;
+    const float tiempoCompleto = 1.0f;
 
     public GameObject pantalla;
     public GameObject pantallaFin;
@@ -56,7 +57,7 @@ public class InteraccionTrabajo : MonoBehaviour
 
             objetoDestacado.transform.localScale = Vector3.Lerp(escalaOriginal, escalaDeseada, fraccionDeTiempo);
 
-            if (fraccionDeTiempo == 1f)
+            if (fraccionDeTiempo == tiempoCompleto)
             {
                 enTransicion = false;
             }
