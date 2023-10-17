@@ -15,7 +15,7 @@ public class Condicion : MonoBehaviour
     public Image fondoHambre;
     public float alturaH;
     public float sed;
-    public Image barraVidaSed;
+    public Image barraSed;
     public Image fondoSed;
     public float alturaS;
     public float cansancio;
@@ -93,7 +93,7 @@ public class Condicion : MonoBehaviour
 
         AcotarEstados();
 
-        barraVidaSed.rectTransform.offsetMin = new Vector2(barraVidaSed.rectTransform.offsetMin.x, sed / 100 * alturaS);
+        barraSed.rectTransform.offsetMin = new Vector2(barraSed.rectTransform.offsetMin.x, sed / 100 * alturaS);
         barraHambre.rectTransform.offsetMin = new Vector2(barraHambre.rectTransform.offsetMin.x, hambre / 100 * alturaH);
         barraVidaCansancio.rectTransform.offsetMin = new Vector2(barraVidaCansancio.rectTransform.offsetMin.x, cansancio / 100 * alturaC);
         barraEstres.rectTransform.offsetMin = new Vector2(barraEstres.rectTransform.offsetMin.x, estres / 100 * alturaE);
