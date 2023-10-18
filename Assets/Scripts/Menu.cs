@@ -8,7 +8,7 @@ public class Menu : MonoBehaviour
 {
     public MovimientoJugador jugador;
 
-    public ControladorDeHora control;
+    public PasoDelTiempo control;
 
     public GameObject menuInicial;
 
