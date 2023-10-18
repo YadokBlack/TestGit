@@ -20,6 +20,6 @@ public class Barras : MonoBehaviour
 
     void Update()
     {
-        barraVida.rectTransform.offsetMin = new Vector2(barraVida.rectTransform.offsetMin.x, vidaActual / vidaMaxima * altura);
+        barraVida.rectTransform.offsetMin = new Vector2(barraVida.rectTransform.offsetMin.x, vidaActual / vidaMaxima * alturaBarra);
     }
 }
