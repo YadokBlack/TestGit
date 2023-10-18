@@ -1,21 +1,11 @@
 using TMPro;
 using UnityEngine;
 
-/*
- *  Se encarga de controlar las zonas que hay cercas y cual de ellas esta activa
- *  De la zona activa muestra el mensaje correspondiente. 
- *  Activando o desactivando el cuadro de texto segun se encuentre el jugador
- *  
- *  Todas las zonas que tendrá en cuenta se en cuentran en la capa capaZonas
- * 
- *  Utiliza ZonaDeColision.
- */
-
 public class ControlZonas : MonoBehaviour
 {
     public LayerMask capaZonas;
     public float radioDeDeteccion = 2f;
-    public Transform jugador; // Referencia al jugador
+    public Transform jugador; 
     public bool jugadorEnZona;
     public string nombreZonaJugador;
 
@@ -49,8 +39,6 @@ public class ControlZonas : MonoBehaviour
 
         Collider[] colliders = Physics.OverlapSphere(jugador.position, radioDeDeteccion, capaZonas);
 
-        // Debug.Log("Comprobando..");
-
         jugadorEnZona = false;
         foreach (Collider collider in colliders)
         {
@@ -59,7 +47,6 @@ public class ControlZonas : MonoBehaviour
             {
                 if (zona.jugadorEnLaZona)
                 {
-                    // Mostrar el mensaje de la zona
                     MostrarMensaje(zona.mensajeZona);
                     jugadorEnZona = true;
                     nombreZonaJugador = zona.name; 
@@ -82,7 +69,7 @@ public class ControlZonas : MonoBehaviour
     private void MostrarMensaje(string mensaje)
     {
         panelMensaje.SetActive(true); 
-        // Aquí puedes mostrar el mensaje en tu cuadro de texto.
+
         textoMensaje.text = mensaje;
 
         if (inicia)
@@ -91,10 +78,9 @@ public class ControlZonas : MonoBehaviour
         }
     }
 
-    // Este método se llama en el editor de Unity para dibujar la esfera de detección
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue; // Color de la esfera de detección
+        Gizmos.color = Color.blue; 
         Gizmos.DrawWireSphere(jugador.position, radioDeDeteccion);
     }
 }
