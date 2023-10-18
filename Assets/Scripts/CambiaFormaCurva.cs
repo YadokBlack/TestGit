@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CambiaFormaCurva : MonoBehaviour
 {
-    public AnimationCurve escalaCurve; // Curva de escala personalizada
-    public AnimationCurve tiempoCurve; // Curva de tiempo personalizada
-    public float duracionTransicion = 2.0f; // Duración de la transición en segundos
+    public AnimationCurve escalaCurve; 
+    public AnimationCurve tiempoCurve; 
+    public float duracionTransicion = 2.0f; 
 
     private Vector3 escalaOriginal;
     private Vector3 escalaDeseada;
@@ -17,8 +17,8 @@ public class CambiaFormaCurva : MonoBehaviour
     {
         enTransicion = false;
 
-        escalaOriginal = transform.localScale; // Guardar la escala original del objeto
-        escalaDeseada = escalaOriginal * 2.0f; // Escala deseada (por ejemplo, el doble de tamaño)
+        escalaOriginal = transform.localScale; 
+        escalaDeseada = escalaOriginal * 2.0f; 
     }
 
     private void OnMouseEnter()
@@ -31,7 +31,6 @@ public class CambiaFormaCurva : MonoBehaviour
     {
         AnimacionSize();
     }
-
     private void AnimacionSize()
     {
         if (enTransicion)
@@ -39,13 +38,10 @@ public class CambiaFormaCurva : MonoBehaviour
             float tiempoTranscurrido = Time.time - tiempoInicioTransicion;
             float fraccionDeTiempo = Mathf.Clamp01(tiempoTranscurrido / duracionTransicion);
 
-            // Evalúa la curva de tiempo para controlar la velocidad de la animación
             float tiempoFactor = tiempoCurve.Evaluate(fraccionDeTiempo);
 
-            // Evalúa la curva de escala para obtener el porcentaje de escala
             float porcentajeEscala = escalaCurve.Evaluate(fraccionDeTiempo);
 
-            // Interpola entre la escala original y la escala deseada usando el porcentaje de escala
             transform.localScale = Vector3.Lerp(escalaOriginal, escalaOriginal * porcentajeEscala, porcentajeEscala);
 
             if (fraccionDeTiempo == 1f)
