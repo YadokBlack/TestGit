@@ -13,7 +13,6 @@ public class Menu : MonoBehaviour
     public GameObject menuInicial;
 
     public GameObject panelMensaje;
-
     public GameObject panelPartida;
 
     public GameObject panelVictoria;
@@ -88,7 +87,6 @@ public class Menu : MonoBehaviour
         if (juegoIniciado && reloj.diasDelJuego > diasTopeJuego && !reloj.pantallaNegra && !gameOver)
         {
             panelPartida.SetActive(false);
-
             panelGameOver.SetActive(true);
 
             jugador.Pausar();
