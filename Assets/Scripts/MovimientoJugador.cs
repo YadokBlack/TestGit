@@ -26,11 +26,9 @@ public class MovimientoJugador : MonoBehaviour
 
     void Update()
     {
-
-        // Rotación con el mouse
         float rotacionHorizontal = Input.GetAxis("Mouse X") * sensibilidadMouse;
         rotacionVertical -= Input.GetAxis("Mouse Y") * sensibilidadMouse;
-        rotacionVertical = Mathf.Clamp(rotacionVertical, -90.0f, 90.0f); // Limitar la rotación vertical
+        rotacionVertical = Mathf.Clamp(rotacionVertical, -90.0f, 90.0f); 
 
         transform.Rotate(0.0f, rotacionHorizontal, 0.0f);
         Camera.main.transform.localRotation = Quaternion.Euler(rotacionVertical, 0.0f, 0.0f);
@@ -42,7 +40,5 @@ public class MovimientoJugador : MonoBehaviour
 
         Vector3 movimiento = new Vector3(movimientoHorizontal, 0.0f, movimientoVertical) * velocidad * Time.deltaTime;
         transform.Translate(movimiento);
-
-
     }
 }
