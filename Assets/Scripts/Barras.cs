@@ -7,7 +7,7 @@ public class Barras : MonoBehaviour
 {
     public Image barraVida;
 
-    public Image fondo;
+    public Image fondoBarraVida;
 
     public float vidaActual;
 
@@ -17,7 +17,7 @@ public class Barras : MonoBehaviour
 
     void Start()
     {
-        altura = fondo.rectTransform.rect.height;
+        altura = fondoBarraVida.rectTransform.rect.height;
     }
 
     void Update()
