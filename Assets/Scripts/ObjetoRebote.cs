@@ -14,7 +14,6 @@ public class ObjetoRebote : MonoBehaviour
     private void Start()
     {
         tiempoPasado = 0.0f;
-
         transform.localScale = tamañoInicial;
     }
 
@@ -26,13 +25,12 @@ public class ObjetoRebote : MonoBehaviour
         float factorCurva = curvaDeCrecimiento.Evaluate(factorInterpolación);
 
         Vector3 nuevoTamaño = Vector3.Lerp(tamañoInicial, tamañoFinal, factorCurva);
-
         transform.localScale = nuevoTamaño;
 
         if (factorInterpolación >= 1.0f)
         {
-            // Aquí puedes reiniciar el proceso si lo deseas
-            // tiempoPasado = 0.0f;
+            tiempoPasado = 0.0f;
+            transform.localScale = tamañoInicial;
         }
     }
 }
