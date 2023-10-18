@@ -98,7 +98,7 @@ public class Menu : MonoBehaviour
             trabajando.zonaControl.pausaDeteccion = true;
 
             panelMensaje.SetActive(true);
-            panelMensaje.GetComponentInChildren<TextMeshProUGUI>().text = $"Tu progreso del juego llegó al :{barraProgreso.porcentaje.ToString()}%\r\n\r\nPulsa Espacio para volver al menú.";
+            panelMensaje.GetComponentInChildren<TextMeshProUGUI>().text = $"Tu progreso del juego llegó al :{barraProgreso.vidaEnPorcentaje.ToString()}%\r\n\r\nPulsa Espacio para volver al menú.";
         }
 
         if (juegoIniciado && trabajando.haGanado && !gameWin)
