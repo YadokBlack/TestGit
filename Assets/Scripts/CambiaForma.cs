@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CambiaForma : MonoBehaviour
 {
+    const float tiempoCompleto = 1.0f;
+
     public float aumentoPorcentaje = 25f; 
     public float duracionTransicion = 0.30f; 
 
@@ -46,7 +48,7 @@ public class CambiaForma : MonoBehaviour
 
             transform.localScale = Vector3.Lerp(escalaOriginal, escalaDeseada, escalaFactor);
 
-            if (fraccionDeTiempo == 1f)
+            if (fraccionDeTiempo == tiempoCompleto)
             {
                 enTransicion = false;
             }
