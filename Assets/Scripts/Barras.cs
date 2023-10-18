@@ -6,18 +6,16 @@ using UnityEngine.UI;
 public class Barras : MonoBehaviour
 {
     public Image barraVida;
-
     public Image fondoBarraVida;
 
     public float vidaActual;
-
     public float vidaMaxima;
 
-    public float altura;
+    public float alturaBarra;
 
     void Start()
     {
-        altura = fondoBarraVida.rectTransform.rect.height;
+        alturaBarra = fondoBarraVida.rectTransform.rect.height;
     }
 
     void Update()
