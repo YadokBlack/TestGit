@@ -8,7 +8,7 @@ public class Menu : MonoBehaviour
 {
     public MovimientoJugador jugador;
 
-    public PasoDelTiempo control;
+    public PasoDelTiempo reloj;
 
     public GameObject menuInicial;
 
@@ -42,7 +42,7 @@ public class Menu : MonoBehaviour
         juegoIniciado = false;
         gameOver = false;
         gameWin = false;
-        control.diasTopeJuego = diasTopeJuego;
+        reloj.diasTopeJuego = diasTopeJuego;
     }
 
     private void Awake()
@@ -61,7 +61,7 @@ public class Menu : MonoBehaviour
             panelMensaje.SetActive(true);
             panelMensaje.GetComponentInChildren<TextMeshProUGUI>().text = "Es hora de programar ve al ordenador.\r\n\r\nUtiliza W,A,S,D para moverte y el ratón para girar.";
             jugador.Iniciar();
-            control.Iniciar();            
+            reloj.Iniciar();            
             panelPartida.SetActive(true);
         }
 
@@ -85,14 +85,14 @@ public class Menu : MonoBehaviour
             SceneManager.LoadScene(currentSceneIndex);
         }
 
-        if (juegoIniciado && control.diasDelJuego > diasTopeJuego && !control.pantallaNegra && !gameOver)
+        if (juegoIniciado && reloj.diasDelJuego > diasTopeJuego && !reloj.pantallaNegra && !gameOver)
         {
             panelPartida.SetActive(false);
 
             panelGameOver.SetActive(true);
 
             jugador.Pausar();
-            control.Pausar();
+            reloj.Pausar();
             gameOver = true;
 
             trabajando.zonaControl.pausaDeteccion = true;
@@ -110,12 +110,12 @@ public class Menu : MonoBehaviour
 
             panelVictoria.SetActive(true);
             jugador.Pausar();
-            control.Pausar();
+            reloj.Pausar();
 
-            string diaOdia = control.diasDelJuego == 1 ? "día" : "días";
-            string horaOs = control.horasDelJuego == 1 ? "hora" : "horas";
-            string minOs = control.minutosDelJuego == 1 ? "minuto" : "minutos";
-            string tiempoJuego = $"¡Has logrado acabar tu juego!\r\nEn {control.diasDelJuego-1} {diaOdia}, {control.horasDelJuego:D2} {horaOs} y {control.minutosDelJuego:D2} {minOs}.\r\nCon un total de {trabajando.teclasPulsadas} acciones.";
+            string diaOdia = reloj.diasDelJuego == 1 ? "día" : "días";
+            string horaOs = reloj.horasDelJuego == 1 ? "hora" : "horas";
+            string minOs = reloj.minutosDelJuego == 1 ? "minuto" : "minutos";
+            string tiempoJuego = $"¡Has logrado acabar tu juego!\r\nEn {reloj.diasDelJuego-1} {diaOdia}, {reloj.horasDelJuego:D2} {horaOs} y {reloj.minutosDelJuego:D2} {minOs}.\r\nCon un total de {trabajando.teclasPulsadas} acciones.";
             textoResultado.text = tiempoJuego;
 
             gameWin = true;
