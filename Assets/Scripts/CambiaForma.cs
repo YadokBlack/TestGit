@@ -2,14 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// el script debe estar sobre un mesh de un objeto y
-// dicho objeto debe tener un collider para funcionar
-
-
 public class CambiaForma : MonoBehaviour
 {
-    public float aumentoPorcentaje = 25f; // Porcentaje de aumento
-    public float duracionTransicion = 0.30f; // Duración de la transición en segundos
+    public float aumentoPorcentaje = 25f; 
+    public float duracionTransicion = 0.30f; 
 
     public AnimationCurve escalaCurva;
 
@@ -24,8 +20,8 @@ public class CambiaForma : MonoBehaviour
         enTransicion = false;
         isBig = false;
 
-        escalaOriginal = transform.localScale; // Guardar la escala original del objeto
-        escalaDeseada = escalaOriginal * (1 + (aumentoPorcentaje / 100f)); // Calcular el tamaño deseado
+        escalaOriginal = transform.localScale; 
+        escalaDeseada = escalaOriginal * (1 + (aumentoPorcentaje / 100f)); 
     }
 
     private void OnMouseEnter()
@@ -36,7 +32,6 @@ public class CambiaForma : MonoBehaviour
 
     private void Update()
     {
-        // AnimacionSize();
         AnimacionSizeCurva();
     }
 
@@ -47,10 +42,8 @@ public class CambiaForma : MonoBehaviour
             float tiempoTranscurrido = Time.time - tiempoInicioTransicion;
             float fraccionDeTiempo = Mathf.Clamp01(tiempoTranscurrido / duracionTransicion);
 
-            // Evalúa la curva en el tiempo para obtener el factor de escala
             float escalaFactor = escalaCurva.Evaluate(fraccionDeTiempo);
 
-            // Interpola entre la escala original y la escala deseada usando el factor de escala
             transform.localScale = Vector3.Lerp(escalaOriginal, escalaDeseada, escalaFactor);
 
             if (fraccionDeTiempo == 1f)
@@ -64,7 +57,6 @@ public class CambiaForma : MonoBehaviour
     {
         if (enTransicion && !isBig)
         {
-            // vamos a agrandar
             float tiempoTranscurrido = Time.time - tiempoInicioTransicion;
             float fraccionDeTiempo = Mathf.Clamp01(tiempoTranscurrido / duracionTransicion);
 
@@ -79,7 +71,6 @@ public class CambiaForma : MonoBehaviour
 
         if (isBig && enTransicion)
         {
-            // vamos a reducir
             float tiempoTranscurrido = Time.time - tiempoInicioTransicion;
             float fraccionDeTiempo = Mathf.Clamp01(tiempoTranscurrido / duracionTransicion);
 
