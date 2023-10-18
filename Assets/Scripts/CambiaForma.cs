@@ -64,7 +64,7 @@ public class CambiaForma : MonoBehaviour
 
             transform.localScale = Vector3.Lerp(escalaOriginal, escalaDeseada, fraccionDeTiempo);
 
-            if (fraccionDeTiempo == 1f)
+            if (fraccionDeTiempo == tiempoCompleto)
             {
                 enTransicion = false;
                 isBig = true;
@@ -77,7 +77,7 @@ public class CambiaForma : MonoBehaviour
             float fraccionDeTiempo = Mathf.Clamp01(tiempoTranscurrido / duracionTransicion);
 
             transform.localScale = Vector3.Lerp(escalaDeseada, escalaOriginal, fraccionDeTiempo);
-            if (fraccionDeTiempo == 1f)
+            if (fraccionDeTiempo == tiempoCompleto)
             {
                 enTransicion = false;
                 isBig = false;
