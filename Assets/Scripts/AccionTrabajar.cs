@@ -12,6 +12,8 @@ using UnityEngine;
 
 public class AccionTrabajar : MonoBehaviour
 {
+    private const float tiempoCompleto = 1.0f;
+
     public KeyCode teclaAccion = KeyCode.E;
     public string mensajeInteraccion = "Pulsa E para programar.";
 
@@ -88,7 +90,7 @@ public class AccionTrabajar : MonoBehaviour
 
             objetoDestacado.transform.localScale = Vector3.Lerp(escalaOriginal, escalaDeseada, fraccionDeTiempo);
 
-            if (fraccionDeTiempo == 1f)
+            if (fraccionDeTiempo == tiempoCompleto)
             {
                 enTransicion = false;
             }
