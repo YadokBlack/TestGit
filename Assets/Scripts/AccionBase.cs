@@ -28,8 +28,7 @@ public class AccionBase : MonoBehaviour
 
     public Condicion condicion;
 
-    [SerializeField]
-    private GameObject pantalla;
+    public GameObject pantalla;
 
     public AudioManager audioManager;
     public int numClip = 0;
