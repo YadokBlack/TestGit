@@ -12,9 +12,6 @@ using UnityEngine;
 
 public class AccionTrabajar : MonoBehaviour
 {
-    private const float tiempoCompleto = 1.0f;
-
-    public KeyCode teclaAccion = KeyCode.E;
     public string mensajeInteraccion = "Pulsa E para programar.";
 
     public BarraHorizontal barraProgreso;
@@ -28,10 +25,17 @@ public class AccionTrabajar : MonoBehaviour
     public GameObject victoria;
     public GameObject pantallaFin;
 
+    private const float tiempoCompleto = 1.0f;
+
+    public Color colorPunto = Color.red;
+
+    public KeyCode teclaAccion = KeyCode.E;
+
     public int costeTiempo = 5;
     public float[] beneficios = null;
 
     public GameObject objetoDestacado;
+    public Vector3 posicionObjeto;
     private Vector3 escalaOriginal;
     private bool enTransicion;
     private float tiempoInicioTransicion;
@@ -201,5 +205,11 @@ public class AccionTrabajar : MonoBehaviour
         {
             pantalla.SetActive(false);
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = colorPunto; // Color del punto
+        Gizmos.DrawSphere(posicionObjeto, 0.01f); // Dibujar un punto en la posición deseada
     }
 }
