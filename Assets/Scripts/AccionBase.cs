@@ -16,8 +16,8 @@ public class AccionBase : MonoBehaviour
     public GameObject objetoDestacado;
     public Vector3 posicionObjeto;
     public Vector3 escalaOriginal;
-    private bool enTransicion;
-    private float tiempoInicioTransicion;
+    public bool enTransicion;
+    public float tiempoInicioTransicion;
     public float duracionTransicion = 0.30f;
     public float escalaPorcentaje;
 
@@ -64,7 +64,7 @@ public class AccionBase : MonoBehaviour
         }
     }
 
-    private void ControlPantallaEnZona()
+    public void ControlPantallaEnZona()
     {
         if (zonaControl.jugadorEnZona && zonaControl.nombreZonaJugador == zonaControlada.name && pantalla != null)
         {
