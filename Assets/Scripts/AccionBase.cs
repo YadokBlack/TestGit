@@ -63,6 +63,14 @@ public class AccionBase : MonoBehaviour
         }
     }
 
+    public void ReproduceClip()
+    {
+        if (audioManager != null)
+        {
+            audioManager.PlayAudioByIndex(numClip);
+        }
+    }
+
     public void ControlPantallaEnZona()
     {
         if (zonaControl.jugadorEnZona && zonaControl.nombreZonaJugador == zonaControlada.name && pantalla != null)

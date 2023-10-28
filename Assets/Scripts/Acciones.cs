@@ -48,10 +48,7 @@ public class Acciones : AccionBase
                     tiempoInicioTransicion = Time.time;
                 }
 
-                if (audioManager != null)
-                {                    
-                    audioManager.PlayAudioByIndex(numClip);
-                }                
+                ReproduceClip();
             }
         }
         

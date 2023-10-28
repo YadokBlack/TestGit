@@ -67,10 +67,7 @@ public class AccionTrabajar : AccionBase
                     audioSource.PlayOneShot(sonidoAEjecutar);
                 }
 
-                if (audioManager != null)
-                {
-                    audioManager.PlayAudioByIndex(numClip);
-                }
+                ReproduceClip();
 
                 barraProgreso.vidaActual += incremento + Random.Range(0, incremento);
 
