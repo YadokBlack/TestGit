@@ -197,6 +197,11 @@ public class AccionTrabajar : MonoBehaviour
         
         AnimacionAgrandar();
 
+        ControlPantallaEnZona();
+    }
+
+    private void ControlPantallaEnZona()
+    {
         if (zonaControl.jugadorEnZona && zonaControl.nombreZonaJugador == zonaControlada.name && pantalla != null)
         {
             pantalla.SetActive(true);
