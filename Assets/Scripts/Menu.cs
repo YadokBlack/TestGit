@@ -84,7 +84,7 @@ public class Menu : MonoBehaviour
             SceneManager.LoadScene(currentSceneIndex);
         }
 
-        if (juegoIniciado && reloj.diasDelJuego > diasTopeJuego && !reloj.pantallaNegra && !gameOver)
+        if (juegoIniciado && reloj.tiempoJuego.dia > diasTopeJuego && !reloj.pantallaNegra && !gameOver)
         {
             panelPartida.SetActive(false);
             panelGameOver.SetActive(true);
@@ -110,10 +110,11 @@ public class Menu : MonoBehaviour
             jugador.Pausar();
             reloj.Pausar();
 
-            string diaOdia = reloj.diasDelJuego == 1 ? "día" : "días";
-            string horaOs = reloj.horasDelJuego == 1 ? "hora" : "horas";
-            string minOs = reloj.minutosDelJuego == 1 ? "minuto" : "minutos";
-            string tiempoJuego = $"¡Has logrado acabar tu juego!\r\nEn {reloj.diasDelJuego-1} {diaOdia}, {reloj.horasDelJuego:D2} {horaOs} y {reloj.minutosDelJuego:D2} {minOs}.\r\nCon un total de {trabajando.teclasPulsadas} acciones.";
+            string diaOdia = reloj.tiempoJuego.dia == 1 ? "día" : "días";
+            string horaOs = reloj.tiempoJuego.hora == 1 ? "hora" : "horas";
+            string minOs = reloj.tiempoJuego.minuto == 1 ? "minuto" : "minutos";
+            string tiempoJuego = $"¡Has logrado acabar tu juego!\r\nEn {reloj.tiempoJuego.dia-1} {diaOdia}," +
+                $" {reloj.tiempoJuego.hora:D2} {horaOs} y {reloj.tiempoJuego.minuto:D2} {minOs}.\r\nCon un total de {trabajando.teclasPulsadas} acciones.";
             textoResultado.text = tiempoJuego;
 
             gameWin = true;
