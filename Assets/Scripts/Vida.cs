@@ -23,8 +23,12 @@ public class Vida
             }
         }
     }
-    public bool verPorcentaje;
+    
     public float proporcion {
         get{ return actual / maxima; } }
 
+    public Vida()
+    {
+        actual = valorInicial;
+    }
 }

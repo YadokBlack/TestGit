@@ -11,6 +11,7 @@ public class BarraHorizontal : MonoBehaviour
     public Image barraVida;
     public Image imagenFondoBarra;
     private float anchoImagenFondoBarra;
+    public bool verPorcentaje;
 
     public TextMeshProUGUI mensajeProgreso;
 
@@ -23,7 +24,7 @@ public class BarraHorizontal : MonoBehaviour
 
     void Update()
     {
-        if (vida.verPorcentaje)
+        if (verPorcentaje)
         {
             mensajeProgreso.text = "Progreso del proyecto: " + vida.porcentaje.ToString("D2") + " %";
         }
