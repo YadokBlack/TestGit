@@ -6,27 +6,13 @@ using UnityEngine.UI;
 
 public class Condicion : MonoBehaviour
 {
-    public float estres;
-    public Image barraEstres;
-    public Image fondoEstres;
-    public float alturaEstres;
-    public float hambre;
-    public Image barraHambre;
-    public Image fondoHambre;
-    public float alturaHambre;
-    public float sed;
-    public Image barraSed;
-    public Image fondoSed;
-    public float alturaSed;
-    public float cansancio;
-    public Image barraCansancio;
-    public Image fondoCansancio;
-    public float alturaCansancio;
+    public Estado estres;
 
-    public float tiempoEntreCambioEstres = 10f;  
-    public float tiempoEntreCambioHambre = 15f;  
-    public float tiempoEntreCambioSed = 20f;     
-    public float tiempoEntreCambioCansancio = 30f; 
+    public Estado hambre;
+
+    public Estado sed;
+
+    public Estado cansancio;
 
     private float tiempoUltimoCambioEstres;
     private float tiempoUltimoCambioHambre;
@@ -39,17 +25,17 @@ public class Condicion : MonoBehaviour
 
     private void Awake()
     {
-        estres = 0;
-        hambre = 0;
-        sed = 0;
-        cansancio = 0;
+        estres.valor = 0;
+        hambre.valor = 0;
+        sed.valor = 0;
+        cansancio.valor = 0;
 
-        alturaCansancio = fondoCansancio.rectTransform.rect.height;
-        alturaEstres = fondoEstres.rectTransform.rect.height;
-        alturaSed = fondoSed.rectTransform.rect.height;
-        alturaHambre = fondoHambre.rectTransform.rect.height;
+        cansancio.altura = cansancio.fondo.rectTransform.rect.height;
+        estres.altura = estres.fondo.rectTransform.rect.height;
+        sed.altura = sed.fondo.rectTransform.rect.height;
+        hambre.altura = hambre.fondo.rectTransform.rect.height;
 
-        Debug.Log(" C" + alturaCansancio + " E" + alturaEstres + " S" + alturaSed + " H" + alturaHambre);
+        Debug.Log(" C" + cansancio.altura + " E" + estres.altura + " S" + sed.altura + " H" + hambre.altura);
 
         tiempoUltimoCambioEstres = Time.time;
         tiempoUltimoCambioHambre = Time.time;
@@ -63,49 +49,49 @@ public class Condicion : MonoBehaviour
 
         if ( control.pantallaNegra )
         {
-            cansancio = 0.0f;
-            estres = 0.0f;
+            cansancio.valor = 0.0f;
+            estres.valor = 0.0f;
         }
 
-        if (tiempoActual - tiempoUltimoCambioEstres >= tiempoEntreCambioEstres)
+        if (tiempoActual - tiempoUltimoCambioEstres >= estres.tiempoEntreCambio)
         {
-            estres += 1 + Random.Range(0.1f, aumentoAleatorio);  
+            estres.valor += 1 + Random.Range(0.1f, aumentoAleatorio);  
             tiempoUltimoCambioEstres = tiempoActual;  
         }
 
-        if (tiempoActual - tiempoUltimoCambioHambre >= tiempoEntreCambioHambre)
+        if (tiempoActual - tiempoUltimoCambioHambre >= hambre.tiempoEntreCambio)
         {
-            hambre += 1 + Random.Range(0.1f, aumentoAleatorio);  
+            hambre.valor += 1 + Random.Range(0.1f, aumentoAleatorio);  
             tiempoUltimoCambioHambre = tiempoActual;  
         }
 
-        if (tiempoActual - tiempoUltimoCambioSed >= tiempoEntreCambioSed)
+        if (tiempoActual - tiempoUltimoCambioSed >= sed.tiempoEntreCambio)
         {
-            sed += 1 + Random.Range(0.1f, aumentoAleatorio); 
+            sed.valor += 1 + Random.Range(0.1f, aumentoAleatorio); 
             tiempoUltimoCambioSed = tiempoActual;  
         }
 
-        if (tiempoActual - tiempoUltimoCambioCansancio >= tiempoEntreCambioCansancio)
+        if (tiempoActual - tiempoUltimoCambioCansancio >= cansancio.tiempoEntreCambio)
         {
-            cansancio += 1 + Random.Range(0.1f, aumentoAleatorio); 
+            cansancio.valor += 1 + Random.Range(0.1f, aumentoAleatorio); 
             tiempoUltimoCambioCansancio = tiempoActual;  
         }
 
         AcotarEstados();
 
-        barraSed.rectTransform.offsetMin = new Vector2(barraSed.rectTransform.offsetMin.x, sed / 100 * alturaSed);
-        barraHambre.rectTransform.offsetMin = new Vector2(barraHambre.rectTransform.offsetMin.x, hambre / 100 * alturaHambre);
-        barraCansancio.rectTransform.offsetMin = new Vector2(barraCansancio.rectTransform.offsetMin.x, cansancio / 100 * alturaCansancio);
-        barraEstres.rectTransform.offsetMin = new Vector2(barraEstres.rectTransform.offsetMin.x, estres / 100 * alturaEstres);
+        sed.barra.rectTransform.offsetMin = new Vector2(sed.barra.rectTransform.offsetMin.x, sed.valor / 100 * sed.altura);
+        hambre.barra.rectTransform.offsetMin = new Vector2(hambre.barra.rectTransform.offsetMin.x, hambre.valor / 100 * hambre.altura);
+        cansancio.barra.rectTransform.offsetMin = new Vector2(cansancio.barra.rectTransform.offsetMin.x, cansancio.valor / 100 * cansancio.altura);
+        estres.barra.rectTransform.offsetMin = new Vector2(estres.barra.rectTransform.offsetMin.x, estres.valor / 100 * estres.altura);
     }
     public void CambioEstado(float[] beneficios)
     {
         if ( beneficios != null && beneficios.Length == 4)
         {
-            estres += beneficios[0];
-            hambre += beneficios[1];
-            sed += beneficios[2];
-            cansancio += beneficios[3];
+            estres.valor += beneficios[0];
+            hambre.valor += beneficios[1];
+            sed.valor += beneficios[2];
+            cansancio.valor += beneficios[3];
 
             AcotarEstados();
         }
@@ -113,9 +99,9 @@ public class Condicion : MonoBehaviour
 
     private void AcotarEstados()
     {
-        estres = Mathf.Clamp(estres, 0, 100);
-        hambre = Mathf.Clamp(hambre, 0, 100);
-        sed = Mathf.Clamp(sed, 0, 100);
-        cansancio = Mathf.Clamp(cansancio, 0, 100);
+        estres.valor = Mathf.Clamp(estres.valor, 0, 100);
+        hambre.valor = Mathf.Clamp(hambre.valor, 0, 100);
+        sed.valor = Mathf.Clamp(sed.valor, 0, 100);
+        cansancio.valor = Mathf.Clamp(cansancio.valor, 0, 100);
     }
 }
