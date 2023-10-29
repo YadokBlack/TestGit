@@ -6,14 +6,9 @@ using UnityEngine.UI;
 
 
 public class BarraHorizontal : MonoBehaviour
-{
-    const float mitad = 0.5f;
-    const int porcentajeMaximo = 100;
-
+{    
     public Vida vida;
-
     public Image barraVida;
-
     public Image imagenFondoBarra;
     private float anchoImagenFondoBarra;
 
@@ -31,15 +26,8 @@ public class BarraHorizontal : MonoBehaviour
         float proporcionVida = vida.actual / vida.maxima;
 
         if (vida.verPorcentaje)
-        {            
-            if (proporcionVida < mitad)
-            {
-                vida.porcentaje = Mathf.RoundToInt(proporcionVida * porcentajeMaximo); 
-            }
-            else
-            {
-                vida.porcentaje = Mathf.FloorToInt(proporcionVida * porcentajeMaximo); 
-            }
+        {
+            vida.CalcularNumeroPorcentaje(proporcionVida);
 
             mensajeProgreso.text = "Progreso del proyecto: " + vida.porcentaje.ToString("D2") + " %";
         }
