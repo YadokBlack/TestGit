@@ -97,10 +97,10 @@ public class InteraccionTrabajo : MonoBehaviour
             textMeshPro.text = mensajeInteraccion;
 
             if (Input.GetKeyDown(teclaInteraccion) && 
-                    condicion.sed < lleno && 
-                    condicion.cansancio < lleno &&
-                    condicion.estres < lleno && 
-                    condicion.hambre < lleno)
+                    condicion.sed.valor < lleno && 
+                    condicion.cansancio.valor < lleno &&
+                    condicion.estres.valor < lleno && 
+                    condicion.hambre.valor < lleno)
             {
                 if (audioSource != null && sonidoAEjecutar != null)
                 {
@@ -117,7 +117,7 @@ public class InteraccionTrabajo : MonoBehaviour
 
                 condicion.CambioEstado(beneficios);
 
-                barraProgreso.vidaActual += incremento + Random.Range(0, incremento);
+                barraProgreso.vida.actual += incremento + Random.Range(0, incremento);
 
                 ParticleSystem nuevaParticula = Instantiate(particlePrefab, posicionParticulas, Quaternion.identity);
 
@@ -125,7 +125,7 @@ public class InteraccionTrabajo : MonoBehaviour
 
                 Destroy(nuevaParticula.gameObject, 1.1f);
 
-                if ( barraProgreso.vidaActual >= barraProgreso.vidaMaxima )
+                if ( barraProgreso.vida.actual >= barraProgreso.vida.maxima )
                 {
                     victoria.SetActive(true);
                     pantalla.SetActive(false);
@@ -136,24 +136,24 @@ public class InteraccionTrabajo : MonoBehaviour
             }
             else             
             {
-                if (condicion.hambre == lleno || condicion.sed == lleno
-                    || condicion.cansancio == lleno || condicion.estres == lleno)
+                if (condicion.hambre.valor == lleno || condicion.sed.valor == lleno
+                    || condicion.cansancio.valor == lleno || condicion.estres.valor == lleno)
                 {
                     textMeshPro.text = "Uf";
 
-                    if (condicion.hambre == lleno)
+                    if (condicion.hambre.valor == lleno)
                     {
                         textMeshPro.text += ", tengo hambre";
                     }
-                    if (condicion.sed == lleno)
+                    if (condicion.sed.valor == lleno)
                     {
                         textMeshPro.text += ", estoy sediento";
                     }
-                    if (condicion.cansancio == lleno)
+                    if (condicion.cansancio.valor == lleno)
                     {
                         textMeshPro.text += ", estoy cansado";
                     }
-                    if (condicion.estres == lleno)
+                    if (condicion.estres.valor == lleno)
                     {
                         textMeshPro.text += ", me estoy estresando";
                     }
