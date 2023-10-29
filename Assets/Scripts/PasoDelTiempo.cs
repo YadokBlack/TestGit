@@ -1,6 +1,14 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.Rendering;
+using Unity.VisualScripting;
+
+public class TiempoJuego
+{
+    public int dia;
+    public int hora;
+    public int minuto;
+}
 
 public class PasoDelTiempo : MonoBehaviour
 {
@@ -11,9 +19,7 @@ public class PasoDelTiempo : MonoBehaviour
     const int horasTieneUnDia = 24;
     const int minutosTieneUnaHora = 60;
 
-    public int diasDelJuego;
-    public int horasDelJuego;
-    public int minutosDelJuego;
+    public TiempoJuego tiempoJuego;
 
     public float tiempoRealPorMinuto;
     public TextMeshProUGUI textDia;
@@ -36,9 +42,9 @@ public class PasoDelTiempo : MonoBehaviour
 
     private void Awake()
     {
-        diasDelJuego = diaInicio;
-        horasDelJuego = horaInicio;
-        minutosDelJuego= minutoInicio;
+        tiempoJuego.dia = diaInicio;
+        tiempoJuego.hora = horaInicio;
+        tiempoJuego.minuto = minutoInicio;
 
         pausa = true;
     }
@@ -63,7 +69,7 @@ public class PasoDelTiempo : MonoBehaviour
 
             if (tiempoPasadoDesdeUltimaActualizacion >= tiempoRealPorMinuto)
             {
-                minutosDelJuego++;
+                tiempoJuego.minuto++;
                 ComprobarAumentoHora();
 
                 tiempoPasadoDesdeUltimaActualizacion = 0.0f;
@@ -71,13 +77,13 @@ public class PasoDelTiempo : MonoBehaviour
 
             ActualizarHoraEnFormato24();
 
-            if (horasDelJuego >= horasTieneUnDia - 1 )
+            if (tiempoJuego.hora >= horasTieneUnDia - 1 )
             {
                 pantallaNegra = true;                
-                textosDias.text = "DIA - " + diasDelJuego;
+                textosDias.text = "DIA - " + tiempoJuego.dia;
                 fondoNegro.SetActive(true);
                 objetosJuego.ColocarObjetos();
-                diasDelJuego++;
+                tiempoJuego.dia++;
             }
         }
         else
@@ -90,43 +96,44 @@ public class PasoDelTiempo : MonoBehaviour
                 pantallaNegra = false;
                 tiempoNegroPasado = 0.0f;
 
-                horasDelJuego = Random.Range(5, 8);
-                minutosDelJuego = Random.Range(0, 59);
+                tiempoJuego.hora = Random.Range(5, 8);
+                tiempoJuego.minuto = Random.Range(0, 59);
             }
         }
     }
 
     public void AumentaTiempo(int minutos)
     {
-        minutosDelJuego += minutos;
+        tiempoJuego.minuto += minutos;
 
         ComprobarAumentoHora();
     }
 
     public void ComprobarAumentoHora()
     {
-        while (minutosDelJuego >= minutosTieneUnaHora)
+        while (tiempoJuego.minuto >= minutosTieneUnaHora)
         {
-            minutosDelJuego -= minutosTieneUnaHora;
-            horasDelJuego++;
-            if (horasDelJuego >= horasTieneUnDia)
+            tiempoJuego.minuto -= minutosTieneUnaHora;
+            tiempoJuego.hora++;
+            if (tiempoJuego.hora >= horasTieneUnDia)
             {
-                horasDelJuego = 0;
+                tiempoJuego.hora = 0;
             }
         }
     }
 
     private void ActualizarHoraEnFormato24()
     {
-        string horaFormato24 = horasDelJuego.ToString("D2") + ":" + minutosDelJuego.ToString("D2");
+        string horaFormato24 = tiempoJuego.hora.ToString("D2") + ":" + tiempoJuego.minuto.ToString("D2");
 
-        int horasFaltan = 22 - horasDelJuego;
-        int minutosFaltan = minutosTieneUnaHora - minutosDelJuego;
+        int horaFinalDia = 22;
+        int horasFaltan = horaFinalDia - tiempoJuego.hora;
+        int minutosFaltan = minutosTieneUnaHora - tiempoJuego.minuto;
 
         string quedanHoras = horasFaltan.ToString("D2") + ":" + minutosFaltan.ToString("D2");
         textHoraActual.text = quedanHoras;
 
-        int quedanDias = diasTopeJuego - diasDelJuego; 
+        int quedanDias = diasTopeJuego - tiempoJuego.dia; 
 
         textDia.text = quedanDias.ToString("D2") + " DIAS";
 
