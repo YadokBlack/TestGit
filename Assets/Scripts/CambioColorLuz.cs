@@ -23,12 +23,12 @@ public class CambioColorLuz : MonoBehaviour
 
     private void CambiarColorDeLuzDireccional()
     {
-        float horaInterpolacion = Mathf.InverseLerp(0, horaCambioTardeNoche+1, tiempo.horasDelJuego);
+        float horaInterpolacion = Mathf.InverseLerp(0, horaCambioTardeNoche+1, tiempo.tiempoJuego.hora);
         Color colorActual = Color.Lerp(colorManyana, colorTarde, horaInterpolacion);
 
-        if (tiempo.horasDelJuego > horaCambioTardeNoche)
+        if (tiempo.tiempoJuego.hora > horaCambioTardeNoche)
         {
-            horaInterpolacion = Mathf.InverseLerp(horaCambioTardeNoche, horasEnUnDia, tiempo.horasDelJuego);
+            horaInterpolacion = Mathf.InverseLerp(horaCambioTardeNoche, horasEnUnDia, tiempo.tiempoJuego.hora);
 
             colorActual = Color.Lerp(colorTarde, colorNoche, horaInterpolacion);
         }
