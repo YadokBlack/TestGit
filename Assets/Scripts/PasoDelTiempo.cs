@@ -1,14 +1,6 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.Rendering;
-using Unity.VisualScripting;
 
-public class TiempoJuego
-{
-    public int dia;
-    public int hora;
-    public int minuto;
-}
 
 public class PasoDelTiempo : MonoBehaviour
 {
