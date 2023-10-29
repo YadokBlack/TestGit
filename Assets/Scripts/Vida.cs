@@ -10,18 +10,21 @@ public class Vida
     public float valorInicial = 0;
     public float actual;
     public float maxima;
-    public int porcentaje;
-    public bool verPorcentaje;
-
-    public void CalcularNumeroPorcentaje(float proporcionVida)
-    {
-        if (proporcionVida < mitad)
+    public int porcentaje { 
+        get
         {
-            porcentaje = Mathf.RoundToInt(proporcionVida * porcentajeMaximo);
-        }
-        else
-        {
-            porcentaje = Mathf.FloorToInt(proporcionVida * porcentajeMaximo);
+            if (proporcion < mitad)
+            {
+                return Mathf.RoundToInt(proporcion * porcentajeMaximo);
+            }
+            else
+            {
+                return Mathf.FloorToInt(proporcion * porcentajeMaximo);
+            }
         }
     }
+    public bool verPorcentaje;
+    public float proporcion {
+        get{ return actual / maxima; } }
+
 }
