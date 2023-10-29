@@ -4,15 +4,13 @@ using TMPro;
 
 public class PasoDelTiempo : MonoBehaviour
 {
-    public int diaInicio = 1;
-    public int horaInicio = 7;
-    public int minutoInicio = 0;
-
     const int horasTieneUnDia = 24;
     const int minutosTieneUnaHora = 60;
 
+    public int diaInicio = 1;
+    public int horaInicio = 7;
+    public int minutoInicio = 0;
     public TiempoJuego tiempoJuego;
-
     public float tiempoRealPorMinuto;
     public TextMeshProUGUI textDia;
     public TextMeshProUGUI textHoraActual;

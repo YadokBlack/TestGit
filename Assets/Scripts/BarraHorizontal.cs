@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class BarraHorizontal : MonoBehaviour
 {
-    [SerializeField]
     public Vida vida;
     public bool verPorcentaje;
     public Image barraVida;
