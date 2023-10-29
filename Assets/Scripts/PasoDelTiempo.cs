@@ -64,15 +64,7 @@ public class PasoDelTiempo : MonoBehaviour
             if (tiempoPasadoDesdeUltimaActualizacion >= tiempoRealPorMinuto)
             {
                 minutosDelJuego++;
-                if (minutosDelJuego >= minutosTieneUnaHora)
-                {
-                    minutosDelJuego = 0;
-                    horasDelJuego++;
-                    if (horasDelJuego >= horasTieneUnDia)
-                    {
-                        horasDelJuego = 0;                       
-                    }
-                }
+                ComprobarAumentoHora();
 
                 tiempoPasadoDesdeUltimaActualizacion = 0.0f;
             }
@@ -108,6 +100,11 @@ public class PasoDelTiempo : MonoBehaviour
     {
         minutosDelJuego += minutos;
 
+        ComprobarAumentoHora();
+    }
+
+    public void ComprobarAumentoHora()
+    {
         while (minutosDelJuego >= minutosTieneUnaHora)
         {
             minutosDelJuego -= minutosTieneUnaHora;
