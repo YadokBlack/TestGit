@@ -44,10 +44,10 @@ public class AccionTrabajar : AccionBase
         if (zonaControl.jugadorEnZona && zonaControl.nombreZonaJugador == zonaControlada.name && !reloj.pantallaNegra && !haGanado)
         {
             if (Input.GetKeyDown(teclaAccion) &&
-                condicion.sed < 100 &&
-                condicion.cansancio < 100 &&
-                condicion.estres < 100 &&
-                condicion.hambre < 100)
+                condicion.sed.valor < 100 &&
+                condicion.cansancio.valor < 100 &&
+                condicion.estres.valor < 100 &&
+                condicion.hambre.valor < 100)
             {
 
                 teclasPulsadas++;
@@ -95,24 +95,24 @@ public class AccionTrabajar : AccionBase
                     teclasPulsadas++;
                 }
 
-                if (condicion.hambre == 100 || condicion.sed == 100 ||
-                    condicion.cansancio == 100 || condicion.estres == 100)
+                if (condicion.hambre.valor == 100 || condicion.sed.valor == 100 ||
+                    condicion.cansancio.valor == 100 || condicion.estres.valor == 100)
                 {
                     zonaControlada.mensajeZona = "Uf";
 
-                    if (condicion.hambre == 100)
+                    if (condicion.hambre.valor == 100)
                     {
                         zonaControlada.mensajeZona += ", tengo hambre";
                     }
-                    if (condicion.sed == 100)
+                    if (condicion.sed.valor == 100)
                     {
                         zonaControlada.mensajeZona += ", estoy sediento";
                     }
-                    if (condicion.cansancio == 100)
+                    if (condicion.cansancio.valor == 100)
                     {
                         zonaControlada.mensajeZona += ", estoy cansado";
                     }
-                    if (condicion.estres == 100)
+                    if (condicion.estres.valor == 100)
                     {
                         zonaControlada.mensajeZona += ", me estoy estresando";
                     }
