@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Vida
 {
     const float mitad = 0.5f;
     const int porcentajeMaximo = 100;
-
+    [SerializeField]
     public float valorInicial = 0;
     public float actual;
     public float maxima;

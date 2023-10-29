@@ -6,20 +6,18 @@ using UnityEngine.UI;
 
 
 public class BarraHorizontal : MonoBehaviour
-{    
+{
+    [SerializeField]
     public Vida vida;
+    public bool verPorcentaje;
     public Image barraVida;
     public Image imagenFondoBarra;
     private float anchoImagenFondoBarra;
-    public bool verPorcentaje;
-
     public TextMeshProUGUI mensajeProgreso;
 
     void Awake()
     {
         anchoImagenFondoBarra = imagenFondoBarra.rectTransform.rect.width;
-
-        vida.actual = vida.valorInicial;
     }
 
     void Update()
