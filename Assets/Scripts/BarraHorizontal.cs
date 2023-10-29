@@ -4,16 +4,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class BarraHorizontal : MonoBehaviour
 {
     const float mitad = 0.5f;
     const int porcentajeMaximo = 100;
 
-    public float valorInicialVida = 0;
-    public float vidaActual;
-    public float vidaMaxima;
-    public int vidaEnPorcentaje;
-    public bool verPorcentaje;
+    public Vida vida;
 
     public Image barraVida;
 
@@ -26,25 +23,25 @@ public class BarraHorizontal : MonoBehaviour
     {
         anchoImagenFondoBarra = imagenFondoBarra.rectTransform.rect.width;
 
-        vidaActual = valorInicialVida;
+        vida.actual = vida.valorInicial;
     }
 
     void Update()
     {
-        float proporcionVida = vidaActual / vidaMaxima;
+        float proporcionVida = vida.actual / vida.maxima;
 
-        if (verPorcentaje)
+        if (vida.verPorcentaje)
         {            
             if (proporcionVida < mitad)
             {
-                vidaEnPorcentaje = Mathf.RoundToInt(proporcionVida * porcentajeMaximo); 
+                vida.porcentaje = Mathf.RoundToInt(proporcionVida * porcentajeMaximo); 
             }
             else
             {
-                vidaEnPorcentaje = Mathf.FloorToInt(proporcionVida * porcentajeMaximo); 
+                vida.porcentaje = Mathf.FloorToInt(proporcionVida * porcentajeMaximo); 
             }
 
-            mensajeProgreso.text = "Progreso del proyecto: " + vidaEnPorcentaje.ToString("D2") + " %";
+            mensajeProgreso.text = "Progreso del proyecto: " + vida.porcentaje.ToString("D2") + " %";
         }
 
         barraVida.rectTransform.offsetMin = new Vector2( proporcionVida * anchoImagenFondoBarra, barraVida.rectTransform.offsetMin.y);

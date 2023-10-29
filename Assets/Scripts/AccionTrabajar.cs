@@ -69,7 +69,7 @@ public class AccionTrabajar : AccionBase
 
                 ReproduceClip();
 
-                barraProgreso.vidaActual += incremento + Random.Range(0, incremento);
+                barraProgreso.vida.actual += incremento + Random.Range(0, incremento);
 
                 ParticleSystem nuevaParticula = Instantiate(particlePrefab, posicionParticulas, Quaternion.identity);
 
@@ -78,7 +78,7 @@ public class AccionTrabajar : AccionBase
                 Destroy(nuevaParticula.gameObject, 1.1f);
 
                 // victoría
-                if (barraProgreso.vidaActual >= barraProgreso.vidaMaxima)
+                if (barraProgreso.vida.actual >= barraProgreso.vida.maxima)
                 {
                     // AQUI PANTALLA FINAL BUENO !!!
 
