@@ -28,16 +28,16 @@ public class ColorGradientScript : MonoBehaviour
         switch (estados)
         {
             case Estados.Sed:
-                proportion = Mathf.Clamp01(condicion.sed / maxValue);
+                proportion = Mathf.Clamp01(condicion.sed.valor / maxValue);
                 break;
             case Estados.Comida:
-                proportion = Mathf.Clamp01(condicion.hambre / maxValue);
+                proportion = Mathf.Clamp01(condicion.hambre.valor / maxValue);
                 break;
             case Estados.Cansancio:
-                proportion = Mathf.Clamp01(condicion.cansancio / maxValue);
+                proportion = Mathf.Clamp01(condicion.cansancio.valor / maxValue);
                 break;
             case Estados.Estres:
-                proportion = Mathf.Clamp01(condicion.estres / maxValue);
+                proportion = Mathf.Clamp01(condicion.estres.valor / maxValue);
                 break;
         }
 
