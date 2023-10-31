@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class AccionTrabajar : AccionBase
 {
+    const int valorMaximo = 100;
+
     public string mensajeInteraccion = "Pulsa E para programar.";
 
     public BarraHorizontal barraProgreso;
@@ -44,10 +46,10 @@ public class AccionTrabajar : AccionBase
         if (zonaControl.jugadorEnZona && zonaControl.nombreZonaJugador == zonaControlada.name && !reloj.pantallaNegra && !haGanado)
         {
             if (Input.GetKeyDown(teclaAccion) &&
-                condicion.sed.valor < 100 &&
-                condicion.cansancio.valor < 100 &&
-                condicion.estres.valor < 100 &&
-                condicion.hambre.valor < 100)
+                condicion.sed.valor < valorMaximo &&
+                condicion.cansancio.valor < valorMaximo &&
+                condicion.estres.valor < valorMaximo &&
+                condicion.hambre.valor < valorMaximo)
             {
 
                 teclasPulsadas++;
@@ -95,24 +97,24 @@ public class AccionTrabajar : AccionBase
                     teclasPulsadas++;
                 }
 
-                if (condicion.hambre.valor == 100 || condicion.sed.valor == 100 ||
-                    condicion.cansancio.valor == 100 || condicion.estres.valor == 100)
+                if (condicion.hambre.valor == valorMaximo || condicion.sed.valor == valorMaximo ||
+                    condicion.cansancio.valor == valorMaximo || condicion.estres.valor == valorMaximo)
                 {
                     zonaControlada.mensajeZona = "Uf";
 
-                    if (condicion.hambre.valor == 100)
+                    if (condicion.hambre.valor == valorMaximo)
                     {
                         zonaControlada.mensajeZona += ", tengo hambre";
                     }
-                    if (condicion.sed.valor == 100)
+                    if (condicion.sed.valor == valorMaximo)
                     {
                         zonaControlada.mensajeZona += ", estoy sediento";
                     }
-                    if (condicion.cansancio.valor == 100)
+                    if (condicion.cansancio.valor == valorMaximo)
                     {
                         zonaControlada.mensajeZona += ", estoy cansado";
                     }
-                    if (condicion.estres.valor == 100)
+                    if (condicion.estres.valor == valorMaximo)
                     {
                         zonaControlada.mensajeZona += ", me estoy estresando";
                     }
