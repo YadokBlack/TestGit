@@ -23,7 +23,7 @@ public class PasoDelTiempo : MonoBehaviour
 
     public float tiempoEspera = 2f;
 
-    private bool pausa;
+    private bool estaPausado;
 
     public Desorden objetosJuego;
 
@@ -34,23 +34,22 @@ public class PasoDelTiempo : MonoBehaviour
         tiempoJuego.dia = diaInicio;
         tiempoJuego.hora = horaInicio;
         tiempoJuego.minuto = minutoInicio;
-
-        pausa = true;
+        Pausar();
     }
 
     public void Pausar()
     {
-        pausa = true;
+        estaPausado = true;
     }
 
     public void Iniciar()
     {
-        pausa = false;
+        estaPausado = false;
     }
 
     private void Update()
     {
-        if (pausa) return;
+        if (estaPausado) return;
 
         if (!pantallaNegra)
         {
