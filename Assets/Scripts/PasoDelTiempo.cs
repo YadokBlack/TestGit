@@ -68,11 +68,7 @@ public class PasoDelTiempo : MonoBehaviour
 
             if (tiempoJuego.hora >= horasTieneUnDia - 1 )
             {
-                pantallaNegra = true;                
-                textosDias.text = "DIA - " + tiempoJuego.dia;
-                fondoNegro.SetActive(true);
-                objetosJuego.ColocarObjetos();
-                tiempoJuego.dia++;
+                PantallaNuevoDia();
             }
         }
         else
@@ -89,6 +85,15 @@ public class PasoDelTiempo : MonoBehaviour
                 tiempoJuego.minuto = Random.Range(0, 59);
             }
         }
+    }
+
+    public void PantallaNuevoDia()
+    {
+        pantallaNegra = true;
+        textosDias.text = "DIA - " + tiempoJuego.dia;
+        fondoNegro.SetActive(true);
+        objetosJuego.ColocarObjetos();
+        tiempoJuego.dia++;
     }
 
     public void AumentaTiempo(int minutos)
