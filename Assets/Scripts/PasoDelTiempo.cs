@@ -1,7 +1,6 @@
 using UnityEngine;
 using TMPro;
 
-
 public class PasoDelTiempo : MonoBehaviour
 {
     const int horasTieneUnDia = 24;

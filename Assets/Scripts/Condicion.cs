@@ -19,7 +19,7 @@ public class Condicion : MonoBehaviour
     private float tiempoUltimoCambioSed;
     private float tiempoUltimoCambioCansancio;
 
-    public PasoDelTiempo control;
+    public PasoDelTiempo reloj;
 
     public float aumentoAleatorio;
 
@@ -47,7 +47,7 @@ public class Condicion : MonoBehaviour
     {
         float tiempoActual = Time.time;
 
-        if ( control.pantallaNegra )
+        if ( reloj.pantallaNegra )
         {
             cansancio.valor = 0.0f;
             estres.valor = 0.0f;
