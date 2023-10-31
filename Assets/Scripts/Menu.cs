@@ -93,7 +93,7 @@ public class Menu : MonoBehaviour
             reloj.Pausar();
             gameOver = true;
 
-            trabajando.zonaControl.pausaDeteccion = true;
+            trabajando.zona.control.pausaDeteccion = true;
 
             panelMensaje.SetActive(true);
             panelMensaje.GetComponentInChildren<TextMeshProUGUI>().text = $"Tu progreso del juego llegó al :{barraProgreso.vida.porcentaje.ToString()}%\r\n\r\nPulsa Espacio para volver al menú.";

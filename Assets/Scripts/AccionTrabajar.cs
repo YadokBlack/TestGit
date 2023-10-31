@@ -43,7 +43,7 @@ public class AccionTrabajar : AccionBase
 
     void Update()
     {
-        if (zonaControl.jugadorEnZona && zonaControl.nombreZonaJugador == zonaControlada.name && !reloj.pantallaNegra && !haGanado)
+        if (zona.control.jugadorEnZona && zona.control.nombreZonaJugador == zona.colision.name && !reloj.pantallaNegra && !haGanado)
         {
             if (Input.GetKeyDown(teclaAccion) &&
                 condicion.sed.valor < valorMaximo &&
@@ -54,7 +54,7 @@ public class AccionTrabajar : AccionBase
 
                 teclasPulsadas++;
 
-                zonaControlada.mensajeZona = mensajeInteraccion;
+                zona.colision.mensajeZona = mensajeInteraccion;
 
                 reloj.AumentaTiempo(costeTiempo);
                 condicion.CambioEstado(beneficios);
@@ -86,7 +86,7 @@ public class AccionTrabajar : AccionBase
 
                     pantalla.SetActive(false);
                     pantallaFin.SetActive(true);
-                    zonaControl.pausaDeteccion = true;
+                    zona.control.pausaDeteccion = true;
                     haGanado = true;
                 }
             }
@@ -100,30 +100,30 @@ public class AccionTrabajar : AccionBase
                 if (condicion.hambre.valor == valorMaximo || condicion.sed.valor == valorMaximo ||
                     condicion.cansancio.valor == valorMaximo || condicion.estres.valor == valorMaximo)
                 {
-                    zonaControlada.mensajeZona = "Uf";
+                    zona.colision.mensajeZona = "Uf";
 
                     if (condicion.hambre.valor == valorMaximo)
                     {
-                        zonaControlada.mensajeZona += ", tengo hambre";
+                        zona.colision.mensajeZona += ", tengo hambre";
                     }
                     if (condicion.sed.valor == valorMaximo)
                     {
-                        zonaControlada.mensajeZona += ", estoy sediento";
+                        zona.colision.mensajeZona += ", estoy sediento";
                     }
                     if (condicion.cansancio.valor == valorMaximo)
                     {
-                        zonaControlada.mensajeZona += ", estoy cansado";
+                        zona.colision.mensajeZona += ", estoy cansado";
                     }
                     if (condicion.estres.valor == valorMaximo)
                     {
-                        zonaControlada.mensajeZona += ", me estoy estresando";
+                        zona.colision.mensajeZona += ", me estoy estresando";
                     }
 
-                    zonaControlada.mensajeZona += ", no puedo continuar.";
+                    zona.colision.mensajeZona += ", no puedo continuar.";
                 }
                 else
                 {
-                    zonaControlada.mensajeZona = mensajeInteraccion;
+                    zona.colision.mensajeZona = mensajeInteraccion;
                 }
             }
         }

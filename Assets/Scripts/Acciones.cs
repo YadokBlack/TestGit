@@ -34,7 +34,7 @@ public class Acciones : AccionBase
 
     void Update()
     {
-        if (zonaControl.jugadorEnZona && zonaControl.nombreZonaJugador == zonaControlada.name && !reloj.pantallaNegra)
+        if (zona.control.jugadorEnZona && zona.control.nombreZonaJugador == zona.colision.name && !reloj.pantallaNegra)
         {
             if (Input.GetKeyDown(teclaAccion))
             {

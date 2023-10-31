@@ -1,5 +1,10 @@
 using UnityEngine;
 
+public class Zona
+{
+    public ControlZonas control;
+    public ZonaDeColision colision;
+}
 
 public class AccionBase : MonoBehaviour
 {
@@ -12,8 +17,7 @@ public class AccionBase : MonoBehaviour
 
     public ObjetoAnimado objetoAnimado;
 
-    public ControlZonas zonaControl;
-    public ZonaDeColision zonaControlada;
+    public Zona zona;
 
     public PasoDelTiempo reloj;
 
@@ -39,11 +43,11 @@ public class AccionBase : MonoBehaviour
 
     public void ControlPantallaEnZona()
     {
-        if (zonaControl.jugadorEnZona && zonaControl.nombreZonaJugador == zonaControlada.name && pantalla != null)
+        if (zona.control.jugadorEnZona && zona.control.nombreZonaJugador == zona.colision.name && pantalla != null)
         {
             pantalla.SetActive(true);
         }
-        else if (!zonaControl.jugadorEnZona && pantalla != null)
+        else if (!zona.control.jugadorEnZona && pantalla != null)
         {
             pantalla.SetActive(false);
         }

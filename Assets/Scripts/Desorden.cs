@@ -49,7 +49,7 @@ public class Desorden : MonoBehaviour
 
     public void Colocar( int indexAccion, int indexObjeto)
     {
-        listaAcciones[indexAccion].zonaControlada.mensajeZona = listaObjetos[indexObjeto].mensaje;
+        listaAcciones[indexAccion].zona.colision.mensajeZona = listaObjetos[indexObjeto].mensaje;
         listaAcciones[indexAccion].costeTiempo = listaObjetos[indexObjeto].costeTiempo;
         listaAcciones[indexAccion].beneficios = listaObjetos[indexObjeto].beneficios;
         listaAcciones[indexAccion].objetoAnimado.destacado = listaObjetos[indexObjeto].objetoDestacado;
