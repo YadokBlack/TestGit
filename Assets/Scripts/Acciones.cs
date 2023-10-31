@@ -42,17 +42,17 @@ public class Acciones : AccionBase
 
                 reloj.AumentaTiempo(costeTiempo);
                 condicion.CambioEstado(beneficios);
-                if (objetoDestacado != null && !enTransicion)
+                if (objetoAnimado.destacado != null && !objetoAnimado.enTransicion)
                 {                   
-                    enTransicion = true;
-                    tiempoInicioTransicion = Time.time;
+                    objetoAnimado.enTransicion = true;
+                    objetoAnimado.tiempoInicioTransicion = Time.time;
                 }
 
                 ReproduceClip();
             }
         }
         
-        AnimacionAgrandar();
+        objetoAnimado.AnimacionAgrandar();
 
         ControlPantallaEnZona();
     }

@@ -52,15 +52,15 @@ public class Desorden : MonoBehaviour
         listaAcciones[indexAccion].zonaControlada.mensajeZona = listaObjetos[indexObjeto].mensaje;
         listaAcciones[indexAccion].costeTiempo = listaObjetos[indexObjeto].costeTiempo;
         listaAcciones[indexAccion].beneficios = listaObjetos[indexObjeto].beneficios;
-        listaAcciones[indexAccion].objetoDestacado = listaObjetos[indexObjeto].objetoDestacado;
+        listaAcciones[indexAccion].objetoAnimado.destacado = listaObjetos[indexObjeto].objetoDestacado;
 
-        if (listaAcciones[indexAccion].objetoDestacado != null )
+        if (listaAcciones[indexAccion].objetoAnimado.destacado != null )
         {
-            listaAcciones[indexAccion].objetoDestacado.transform.position = listaAcciones[indexAccion].posicionObjeto;
+            listaAcciones[indexAccion].objetoAnimado.destacado.transform.position = listaAcciones[indexAccion].objetoAnimado.posicion;
         }
         
-        listaAcciones[indexAccion].duracionTransicion = listaObjetos[indexObjeto].duracionTransicion;
-        listaAcciones[indexAccion].escalaPorcentaje = listaObjetos[indexObjeto].escalaPorcentaje;
-        listaAcciones[indexAccion].escalaOriginal = listaObjetos[indexObjeto].escalaOriginal;
+        listaAcciones[indexAccion].objetoAnimado.duracionTransicion = listaObjetos[indexObjeto].duracionTransicion;
+        listaAcciones[indexAccion].objetoAnimado.escalaPorcentaje = listaObjetos[indexObjeto].escalaPorcentaje;
+        listaAcciones[indexAccion].objetoAnimado.escalaOriginal = listaObjetos[indexObjeto].escalaOriginal;
     }
 }

@@ -56,10 +56,10 @@ public class AccionTrabajar : AccionBase
 
                 reloj.AumentaTiempo(costeTiempo);
                 condicion.CambioEstado(beneficios);
-                if (objetoDestacado != null && !enTransicion)
+                if (objetoAnimado.destacado != null && !objetoAnimado.enTransicion)
                 {
-                    enTransicion = true;
-                    tiempoInicioTransicion = Time.time;
+                    objetoAnimado.enTransicion = true;
+                    objetoAnimado.tiempoInicioTransicion = Time.time;
                 }
 
                 if (audioSource != null && sonidoAEjecutar != null)
@@ -126,7 +126,7 @@ public class AccionTrabajar : AccionBase
             }
         }
         
-        AnimacionAgrandar();
+        objetoAnimado.AnimacionAgrandar();
 
         ControlPantallaEnZona();
     }
