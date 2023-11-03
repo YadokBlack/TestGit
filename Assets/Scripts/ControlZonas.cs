@@ -31,11 +31,7 @@ public class ControlZonas : MonoBehaviour
     {
         if (pausaDeteccion) return;
 
-        if (jugador == null)
-        {
-            Debug.LogError("La referencia al jugador no está configurada en el script ControlZonas.");
-            return;
-        }
+        if (jugador == null) return;
 
         Collider[] colliders = Physics.OverlapSphere(jugador.position, radioDeDeteccion, capaZonas);
 
@@ -43,14 +39,11 @@ public class ControlZonas : MonoBehaviour
         foreach (Collider collider in colliders)
         {
             ZonaDeColision zona = collider.GetComponent<ZonaDeColision>();
-            if (zona != null)
+            if (zona != null && zona.jugadorEnLaZona)
             {
-                if (zona.jugadorEnLaZona)
-                {
-                    MostrarMensaje(zona.mensajeZona);
-                    jugadorEnZona = true;
-                    nombreZonaJugador = zona.name; 
-                }
+                MostrarMensaje(zona.mensajeZona);
+                jugadorEnZona = true;
+                nombreZonaJugador = zona.name; 
             }
         }
         if (!jugadorEnZona && !inicia)
