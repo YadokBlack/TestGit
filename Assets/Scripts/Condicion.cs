@@ -71,10 +71,10 @@ public class Condicion : MonoBehaviour
     private void IncrementaEstados()
     {
         float tiempoActual = Time.time;
-        if (TieneEstres(tiempoActual)) IncrementaEstres(tiempoActual);
-        if (TieneHambre(tiempoActual)) IncrementaHambre(tiempoActual);
-        if (TieneSed(tiempoActual)) IncrementaSed(tiempoActual);
-        if (TieneCansancio(tiempoActual)) IncrementaCansancio(tiempoActual);
+        if (EsHoraDeCambiarEstres(tiempoActual)) IncrementaEstres(tiempoActual);
+        if (EsHoraDeCambiarHambre(tiempoActual)) IncrementaHambre(tiempoActual);
+        if (EsHoraDeCambiarSed(tiempoActual)) IncrementaSed(tiempoActual);
+        if (EsHoraDeCambiarCansancio(tiempoActual)) IncrementaCansancio(tiempoActual);
     }
 
     private void ActualizaBarrasEstados()
@@ -89,22 +89,22 @@ public class Condicion : MonoBehaviour
         estres.ActualizaBarra();
     }
 
-    private bool TieneSed(float tiempoActual)
+    private bool EsHoraDeCambiarSed(float tiempoActual)
     {
         return tiempoActual - tiempoUltimoCambioSed >= sed.tiempoEntreCambio;
     }
 
-    private bool TieneEstres(float tiempoActual)
+    private bool EsHoraDeCambiarEstres(float tiempoActual)
     {
         return tiempoActual - tiempoUltimoCambioEstres >= estres.tiempoEntreCambio;
     }
 
-    private bool TieneHambre(float tiempoActual)
+    private bool EsHoraDeCambiarHambre(float tiempoActual)
     {
         return tiempoActual - tiempoUltimoCambioHambre >= hambre.tiempoEntreCambio;
     }
 
-    private bool TieneCansancio(float tiempoActual)
+    private bool EsHoraDeCambiarCansancio(float tiempoActual)
     {
         return tiempoActual - tiempoUltimoCambioCansancio >= cansancio.tiempoEntreCambio;
     }
