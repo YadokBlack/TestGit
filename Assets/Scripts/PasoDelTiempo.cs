@@ -132,6 +132,4 @@ public class PasoDelTiempo : MonoBehaviour
 
         textRelojPC.text = horaFormato24;
     }
-
-
 }

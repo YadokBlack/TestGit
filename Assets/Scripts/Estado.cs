@@ -11,4 +11,10 @@ public class Estado
     public Image fondo;
     public float altura;
     public float tiempoEntreCambio;
+
+
+    public void ActualizaBarra()
+    {
+        barra.rectTransform.offsetMin = new Vector2(barra.rectTransform.offsetMin.x, valor / 100 * altura);
+    }
 }

@@ -12,7 +12,6 @@ public class Condicion : MonoBehaviour
     public Estado hambre;
     public Estado sed;
     public Estado cansancio;
-
     private float tiempoUltimoCambioEstres;
     private float tiempoUltimoCambioHambre;
     private float tiempoUltimoCambioSed;
@@ -66,14 +65,7 @@ public class Condicion : MonoBehaviour
     {        
         if (reloj.pantallaNegra) InicializaCansancioYEstres();
 
-        IncrementaEstados();
-
-        AcotarEstados();
-
-        sed.barra.rectTransform.offsetMin = new Vector2(sed.barra.rectTransform.offsetMin.x, sed.valor / 100 * sed.altura);
-        hambre.barra.rectTransform.offsetMin = new Vector2(hambre.barra.rectTransform.offsetMin.x, hambre.valor / 100 * hambre.altura);
-        cansancio.barra.rectTransform.offsetMin = new Vector2(cansancio.barra.rectTransform.offsetMin.x, cansancio.valor / 100 * cansancio.altura);
-        estres.barra.rectTransform.offsetMin = new Vector2(estres.barra.rectTransform.offsetMin.x, estres.valor / 100 * estres.altura);
+        ActualizaBarrasEstados();
     }
 
     private void IncrementaEstados()
@@ -83,6 +75,18 @@ public class Condicion : MonoBehaviour
         if (TieneHambre(tiempoActual)) IncrementaHambre(tiempoActual);
         if (TieneSed(tiempoActual)) IncrementaSed(tiempoActual);
         if (TieneCansancio(tiempoActual)) IncrementaCansancio(tiempoActual);
+    }
+
+    private void ActualizaBarrasEstados()
+    {
+        IncrementaEstados();
+
+        AcotarEstados();
+
+        sed.ActualizaBarra();
+        hambre.ActualizaBarra();
+        cansancio.ActualizaBarra();
+        estres.ActualizaBarra();
     }
 
     private bool TieneSed(float tiempoActual)
