@@ -24,18 +24,38 @@ public class Condicion : MonoBehaviour
 
     private void Awake()
     {
-        estres.valor = 0;
+        InicializaEstadoValor();
+
+        InicializaAlturas();
+
+        Debug.Log(" C" + cansancio.altura + " E" + estres.altura + " S" + sed.altura + " H" + hambre.altura);
+
+        InicializaTiempoEstados();
+    }
+
+    private void InicializaEstadoValor()
+    {
         hambre.valor = 0;
         sed.valor = 0;
-        cansancio.valor = 0;
+        InicializaCansancioYEstres();
+    }
 
+    private void InicializaCansancioYEstres()
+    {
+        cansancio.valor = 0.0f;
+        estres.valor = 0.0f;
+    }
+
+    private void InicializaAlturas()
+    {
         cansancio.altura = cansancio.fondo.rectTransform.rect.height;
         estres.altura = estres.fondo.rectTransform.rect.height;
         sed.altura = sed.fondo.rectTransform.rect.height;
         hambre.altura = hambre.fondo.rectTransform.rect.height;
+    }
 
-        Debug.Log(" C" + cansancio.altura + " E" + estres.altura + " S" + sed.altura + " H" + hambre.altura);
-
+    private void InicializaTiempoEstados()
+    {
         tiempoUltimoCambioEstres = Time.time;
         tiempoUltimoCambioHambre = Time.time;
         tiempoUltimoCambioSed = Time.time;
@@ -43,38 +63,10 @@ public class Condicion : MonoBehaviour
     }
 
     private void Update()
-    {
-        float tiempoActual = Time.time;
+    {        
+        if (reloj.pantallaNegra) InicializaCansancioYEstres();
 
-        if ( reloj.pantallaNegra )
-        {
-            cansancio.valor = 0.0f;
-            estres.valor = 0.0f;
-        }
-
-        if (tiempoActual - tiempoUltimoCambioEstres >= estres.tiempoEntreCambio)
-        {
-            estres.valor += 1 + Random.Range(0.1f, aumentoAleatorio);  
-            tiempoUltimoCambioEstres = tiempoActual;  
-        }
-
-        if (tiempoActual - tiempoUltimoCambioHambre >= hambre.tiempoEntreCambio)
-        {
-            hambre.valor += 1 + Random.Range(0.1f, aumentoAleatorio);  
-            tiempoUltimoCambioHambre = tiempoActual;  
-        }
-
-        if (tiempoActual - tiempoUltimoCambioSed >= sed.tiempoEntreCambio)
-        {
-            sed.valor += 1 + Random.Range(0.1f, aumentoAleatorio); 
-            tiempoUltimoCambioSed = tiempoActual;  
-        }
-
-        if (tiempoActual - tiempoUltimoCambioCansancio >= cansancio.tiempoEntreCambio)
-        {
-            cansancio.valor += 1 + Random.Range(0.1f, aumentoAleatorio); 
-            tiempoUltimoCambioCansancio = tiempoActual;  
-        }
+        IncrementaEstados();
 
         AcotarEstados();
 
@@ -83,6 +75,60 @@ public class Condicion : MonoBehaviour
         cansancio.barra.rectTransform.offsetMin = new Vector2(cansancio.barra.rectTransform.offsetMin.x, cansancio.valor / 100 * cansancio.altura);
         estres.barra.rectTransform.offsetMin = new Vector2(estres.barra.rectTransform.offsetMin.x, estres.valor / 100 * estres.altura);
     }
+
+    private void IncrementaEstados()
+    {
+        float tiempoActual = Time.time;
+        if (TieneEstres(tiempoActual)) IncrementaEstres(tiempoActual);
+        if (TieneHambre(tiempoActual)) IncrementaHambre(tiempoActual);
+        if (TieneSed(tiempoActual)) IncrementaSed(tiempoActual);
+        if (TieneCansancio(tiempoActual)) IncrementaCansancio(tiempoActual);
+    }
+
+    private bool TieneSed(float tiempoActual)
+    {
+        return tiempoActual - tiempoUltimoCambioSed >= sed.tiempoEntreCambio;
+    }
+
+    private bool TieneEstres(float tiempoActual)
+    {
+        return tiempoActual - tiempoUltimoCambioEstres >= estres.tiempoEntreCambio;
+    }
+
+    private bool TieneHambre(float tiempoActual)
+    {
+        return tiempoActual - tiempoUltimoCambioHambre >= hambre.tiempoEntreCambio;
+    }
+
+    private bool TieneCansancio(float tiempoActual)
+    {
+        return tiempoActual - tiempoUltimoCambioCansancio >= cansancio.tiempoEntreCambio;
+    }
+
+    private void IncrementaSed(float tiempoActual)
+    {
+        sed.valor += 1 + Random.Range(0.1f, aumentoAleatorio);
+        tiempoUltimoCambioSed = tiempoActual;
+    }
+
+    private void IncrementaHambre(float tiempoActual)
+    {
+        hambre.valor += 1 + Random.Range(0.1f, aumentoAleatorio);
+        tiempoUltimoCambioHambre = tiempoActual;
+    }
+
+    private void IncrementaEstres(float tiempoActual)
+    {
+        estres.valor += 1 + Random.Range(0.1f, aumentoAleatorio);
+        tiempoUltimoCambioEstres = tiempoActual;
+    }
+
+    private void IncrementaCansancio(float tiempoActual)
+    {
+        cansancio.valor += 1 + Random.Range(0.1f, aumentoAleatorio);
+        tiempoUltimoCambioCansancio = tiempoActual;
+    }
+
     public void CambioEstado(float[] beneficios)
     {
         if ( beneficios != null && beneficios.Length == 4)
@@ -106,8 +152,7 @@ public class Condicion : MonoBehaviour
 
     public bool AlgunEstadoAlMaximo()
     {
-        return hambre.valor == valorMaximo || sed.valor == valorMaximo ||
-                    cansancio.valor == valorMaximo || estres.valor == valorMaximo;
+        return HambreAlMaximo() || SedAlMaximo() || CansancioAlMaximo() || EstresAlMaximo();
     }
 
     public bool HambreAlMaximo()
