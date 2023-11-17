@@ -39,9 +39,21 @@ public class ObjetoAnimado
                 enTransicion = false;
             }
         }
-        if (!enTransicion && destacado != null)
+
+        if (DestacadoNoEstaEnTransicion())
         {
             destacado.transform.localScale = escalaOriginal;
         }
+    }
+
+    public bool DestacadoNoEstaEnTransicion()
+    {
+        return destacado != null && !enTransicion;
+    }
+
+    public void IniciaTransicion()
+    {
+        enTransicion = true;
+        tiempoInicioTransicion = Time.time;
     }
 }

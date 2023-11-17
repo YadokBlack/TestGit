@@ -72,12 +72,8 @@ public class AccionTrabajar : AccionBase
     {
         reloj.AumentaTiempo(costeTiempo);
         condicion.CambioEstado(beneficios);
-        if (objetoAnimado.destacado != null && !objetoAnimado.enTransicion)
-        {
-            objetoAnimado.enTransicion = true;
-            objetoAnimado.tiempoInicioTransicion = Time.time;
-        }
-
+        if (objetoAnimado.DestacadoNoEstaEnTransicion()) objetoAnimado.IniciaTransicion();
+        
         audioSource.PlayOneShot(sonidoAEjecutar);
 
         ReproduceClip();
