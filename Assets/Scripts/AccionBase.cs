@@ -43,17 +43,14 @@ public class AccionBase : MonoBehaviour
 
     public void ControlPantallaEnZona()
     {
-        if (pantalla != null)
-        {
-            if (zona.control.jugadorEnZona && zona.control.nombreZonaJugador == zona.colision.name)
-            {
-                pantalla.SetActive(true);
-            }
-            else if (!zona.control.jugadorEnZona)
-            {
-                pantalla.SetActive(false);
-            }
-        }
+        if (pantalla == null) return;
+
+        pantalla.SetActive(JugadorEnMiZona());      
+    }
+
+    public bool JugadorEnMiZona()
+    {
+        return zona.control.jugadorEnZona && zona.control.nombreZonaJugador == zona.colision.name;
     }
 
     private void OnDrawGizmosSelected()

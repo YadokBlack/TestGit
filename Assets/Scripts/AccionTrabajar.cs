@@ -45,34 +45,15 @@ public class AccionTrabajar : AccionBase
 
     void Update()
     {
-        if (zona.control.jugadorEnZona && zona.control.nombreZonaJugador == zona.colision.name && !reloj.pantallaNegra && !haGanado)
+        if (JugadorEnMiZonaActivo())
         {
-            if (PulsaTeclaAccion() && !condicion.AlgunEstadoAlMaximo())
+            if (RealizaUnaAccion())
             {
                 teclasPulsadas++;
 
                 zona.colision.mensajeZona = mensajeInteraccion;
 
-                reloj.AumentaTiempo(costeTiempo);
-                condicion.CambioEstado(beneficios);
-                if (objetoAnimado.destacado != null && !objetoAnimado.enTransicion)
-                {
-                    objetoAnimado.enTransicion = true;
-                    objetoAnimado.tiempoInicioTransicion = Time.time;
-                }
-
-                audioSource.PlayOneShot(sonidoAEjecutar);
-
-                ReproduceClip();
-
-                barraProgreso.vida.actual += incremento + Random.Range(0, incremento);
-
-                GeneraParticula();
-
-                if (Victoria())
-                {                    
-                    PantallaFinalBueno();
-                }
+                RealizandoAccion();
             }
             else
             {
@@ -85,6 +66,40 @@ public class AccionTrabajar : AccionBase
         objetoAnimado.AnimacionAgrandar();
 
         ControlPantallaEnZona();
+    }
+
+    private void RealizandoAccion()
+    {
+        reloj.AumentaTiempo(costeTiempo);
+        condicion.CambioEstado(beneficios);
+        if (objetoAnimado.destacado != null && !objetoAnimado.enTransicion)
+        {
+            objetoAnimado.enTransicion = true;
+            objetoAnimado.tiempoInicioTransicion = Time.time;
+        }
+
+        audioSource.PlayOneShot(sonidoAEjecutar);
+
+        ReproduceClip();
+
+        barraProgreso.vida.actual += incremento + Random.Range(0, incremento);
+
+        GeneraParticula();
+
+        if (Victoria())
+        {
+            PantallaFinalBueno();
+        }
+    }
+
+    private bool RealizaUnaAccion()
+    {
+        return PulsaTeclaAccion() && !condicion.AlgunEstadoAlMaximo();
+    }
+
+    private bool JugadorEnMiZonaActivo()
+    {
+        return JugadorEnMiZona() && !reloj.pantallaNegra && !haGanado;
     }
 
     private void GeneraParticula()
