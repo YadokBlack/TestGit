@@ -26,24 +26,32 @@ public class ObjetoAnimado
 
     public void AnimacionAgrandar()
     {
+        if (destacado == null) return;
+
         if (enTransicion)
         {
-            float tiempoTranscurrido = Time.time - tiempoInicioTransicion;
-            float fraccionDeTiempo = Mathf.Clamp01(tiempoTranscurrido / duracionTransicion);
-            Vector3 escalaDeseada = escalaOriginal * escalaPorcentaje;
-
-            destacado.transform.localScale = Vector3.Lerp(escalaOriginal, escalaDeseada, fraccionDeTiempo);
-
-            if (fraccionDeTiempo == tiempoCompleto)
-            {
-                enTransicion = false;
-            }
+            CambiaEscala();
         }
-
-        if (DestacadoNoEstaEnTransicion())
+        else
         {
-            destacado.transform.localScale = escalaOriginal;
+            CambiaEscalaOriginal();
         }
+    }
+
+    private void CambiaEscalaOriginal()
+    {
+        destacado.transform.localScale = escalaOriginal;
+    }
+
+    private void CambiaEscala()
+    {
+        float tiempoTranscurrido = Time.time - tiempoInicioTransicion;
+        float fraccionDeTiempo = Mathf.Clamp01(tiempoTranscurrido / duracionTransicion);
+        Vector3 escalaDeseada = escalaOriginal * escalaPorcentaje;
+
+        destacado.transform.localScale = Vector3.Lerp(escalaOriginal, escalaDeseada, fraccionDeTiempo);
+
+        if (fraccionDeTiempo == tiempoCompleto) enTransicion = false;
     }
 
     public bool DestacadoNoEstaEnTransicion()
