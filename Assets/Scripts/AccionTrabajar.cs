@@ -5,9 +5,7 @@ using UnityEngine;
 
 
 public class AccionTrabajar : AccionBase
-{
-    const int valorMaximo = 100;
-
+{    
     public string mensajeInteraccion = "Pulsa E para programar.";
 
     public BarraHorizontal barraProgreso;
@@ -17,8 +15,7 @@ public class AccionTrabajar : AccionBase
     public ParticleSystem particlePrefab;
     public Vector3 posicionParticulas;
 
-    // pantalla de victoria
-    public GameObject victoria;
+    public GameObject menuVictoria;
     public GameObject pantallaFin;
     
     public bool haGanado;
@@ -37,7 +34,12 @@ public class AccionTrabajar : AccionBase
 
         if (sonidoAEjecutar == null)
         {
-            Debug.LogWarning("No se ha asignado un AudioClip para reproducir.");
+            Debug.LogError("No se ha asignado un AudioClip para reproducir.");
+        }
+
+        if (audioSource == null)
+        {
+            Debug.LogError("AudioSource no encontrado");
         }
     }
 
@@ -45,13 +47,8 @@ public class AccionTrabajar : AccionBase
     {
         if (zona.control.jugadorEnZona && zona.control.nombreZonaJugador == zona.colision.name && !reloj.pantallaNegra && !haGanado)
         {
-            if (Input.GetKeyDown(teclaAccion) &&
-                condicion.sed.valor < valorMaximo &&
-                condicion.cansancio.valor < valorMaximo &&
-                condicion.estres.valor < valorMaximo &&
-                condicion.hambre.valor < valorMaximo)
+            if (PulsaTeclaAccion() && !condicion.AlgunEstadoAlMaximo())
             {
-
                 teclasPulsadas++;
 
                 zona.colision.mensajeZona = mensajeInteraccion;
@@ -64,72 +61,66 @@ public class AccionTrabajar : AccionBase
                     objetoAnimado.tiempoInicioTransicion = Time.time;
                 }
 
-                if (audioSource != null && sonidoAEjecutar != null)
-                {
-                    audioSource.PlayOneShot(sonidoAEjecutar);
-                }
+                audioSource.PlayOneShot(sonidoAEjecutar);
 
                 ReproduceClip();
 
                 barraProgreso.vida.actual += incremento + Random.Range(0, incremento);
 
-                ParticleSystem nuevaParticula = Instantiate(particlePrefab, posicionParticulas, Quaternion.identity);
+                GeneraParticula();
 
-                nuevaParticula.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
-
-                Destroy(nuevaParticula.gameObject, 1.1f);
-
-                // victoría
-                if (barraProgreso.vida.actual >= barraProgreso.vida.maxima)
-                {
-                    // AQUI PANTALLA FINAL BUENO !!!
-
-                    pantalla.SetActive(false);
-                    pantallaFin.SetActive(true);
-                    zona.control.pausaDeteccion = true;
-                    haGanado = true;
+                if (Victoria())
+                {                    
+                    PantallaFinalBueno();
                 }
             }
             else
             {
-                if (Input.GetKeyDown(teclaAccion))
-                {
-                    teclasPulsadas++;
-                }
+                teclasPulsadas += PulsaTeclaAccion() ? 1 : 0;
 
-                if (condicion.hambre.valor == valorMaximo || condicion.sed.valor == valorMaximo ||
-                    condicion.cansancio.valor == valorMaximo || condicion.estres.valor == valorMaximo)
-                {
-                    zona.colision.mensajeZona = "Uf";
-
-                    if (condicion.hambre.valor == valorMaximo)
-                    {
-                        zona.colision.mensajeZona += ", tengo hambre";
-                    }
-                    if (condicion.sed.valor == valorMaximo)
-                    {
-                        zona.colision.mensajeZona += ", estoy sediento";
-                    }
-                    if (condicion.cansancio.valor == valorMaximo)
-                    {
-                        zona.colision.mensajeZona += ", estoy cansado";
-                    }
-                    if (condicion.estres.valor == valorMaximo)
-                    {
-                        zona.colision.mensajeZona += ", me estoy estresando";
-                    }
-
-                    zona.colision.mensajeZona += ", no puedo continuar.";
-                }
-                else
-                {
-                    zona.colision.mensajeZona = mensajeInteraccion;
-                }
+                zona.colision.mensajeZona = condicion.AlgunEstadoAlMaximo() ? GeneraMensaje() : mensajeInteraccion;
             }
         }
         
         objetoAnimado.AnimacionAgrandar();
 
         ControlPantallaEnZona();
+    }
+
+    private void GeneraParticula()
+    {
+        ParticleSystem nuevaParticula = Instantiate(particlePrefab, posicionParticulas, Quaternion.identity);
+        nuevaParticula.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+        Destroy(nuevaParticula.gameObject, 1.1f);
+    }
+
+    private void PantallaFinalBueno()
+    {
+        pantalla.SetActive(false);
+        pantallaFin.SetActive(true);
+        zona.control.pausaDeteccion = true;
+        haGanado = true;
+    }
+
+    private bool PulsaTeclaAccion()
+    {
+        return Input.GetKeyDown(teclaAccion);
+    }
+
+    private string GeneraMensaje()
+    {
+        string mensaje = "Uf";
+        mensaje += condicion.ObtenerMensajeCondicion(", tengo hambre", condicion.HambreAlMaximo());
+        mensaje += condicion.ObtenerMensajeCondicion(", estoy sediento", condicion.SedAlMaximo());
+        mensaje += condicion.ObtenerMensajeCondicion(", estoy cansado", condicion.CansancioAlMaximo());
+        mensaje += condicion.ObtenerMensajeCondicion(", me estoy estresando", condicion.EstresAlMaximo());
+        mensaje += ", no puedo continuar.";
+
+        return mensaje;
+    }
+
+    private bool Victoria()
+    {
+        return barraProgreso.vida.actual >= barraProgreso.vida.maxima;
     }
 }

@@ -6,12 +6,11 @@ using UnityEngine.UI;
 
 public class Condicion : MonoBehaviour
 {
+    const int valorMaximo = 100;
+
     public Estado estres;
-
     public Estado hambre;
-
     public Estado sed;
-
     public Estado cansancio;
 
     private float tiempoUltimoCambioEstres;
@@ -103,5 +102,36 @@ public class Condicion : MonoBehaviour
         hambre.valor = Mathf.Clamp(hambre.valor, 0, 100);
         sed.valor = Mathf.Clamp(sed.valor, 0, 100);
         cansancio.valor = Mathf.Clamp(cansancio.valor, 0, 100);
+    }
+
+    public bool AlgunEstadoAlMaximo()
+    {
+        return hambre.valor == valorMaximo || sed.valor == valorMaximo ||
+                    cansancio.valor == valorMaximo || estres.valor == valorMaximo;
+    }
+
+    public bool HambreAlMaximo()
+    {
+        return hambre.valor == valorMaximo;
+    }
+
+    public bool EstresAlMaximo()
+    {
+        return estres.valor == valorMaximo;
+    }
+
+    public bool CansancioAlMaximo()
+    {
+        return cansancio.valor == valorMaximo;
+    }
+
+    public bool SedAlMaximo()
+    {
+        return sed.valor == valorMaximo;
+    }
+
+    public string ObtenerMensajeCondicion(string mensaje, bool condicion)
+    {
+        return condicion ? mensaje : string.Empty;
     }
 }
