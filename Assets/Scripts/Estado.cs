@@ -6,15 +6,16 @@ using UnityEngine.UI;
 [System.Serializable]
 public class Estado
 {
+    const float maximoValor = 100;
+
     public float valor;
     public Image barra;
     public Image fondo;
     public float altura;
     public float tiempoEntreCambio;
 
-
     public void ActualizaBarra()
     {
-        barra.rectTransform.offsetMin = new Vector2(barra.rectTransform.offsetMin.x, valor / 100 * altura);
+        barra.rectTransform.offsetMin = new Vector2(barra.rectTransform.offsetMin.x, valor / maximoValor * altura);
     }
 }
