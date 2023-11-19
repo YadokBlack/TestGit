@@ -53,35 +53,19 @@ public class Menu : MonoBehaviour
 
     void Update()
     {
-        if (!juegoIniciado && Input.anyKeyDown)
+        if (PulsadoTeclaParaIniciar())
         {
-            juegoIniciado = true;
-            menuInicial.SetActive(false);
-            panelMensaje.SetActive(true);
-            panelMensaje.GetComponentInChildren<TextMeshProUGUI>().text = "Es hora de programar ve al ordenador.\r\n\r\nUtiliza W,A,S,D para moverte y el ratón para girar.";
-            jugador.Iniciar();
-            reloj.Iniciar();            
-            panelPartida.SetActive(true);
+            IniciarPartida();
         }
 
-        if (gameWin && juegoIniciado)
+        if (PartidaGanada())
         {
-            panelMensaje.SetActive(true);
-            panelMensaje.GetComponentInChildren<TextMeshProUGUI>().text = "Pulsa Espacio para volver al menú.";
+            MuestraMensaje("Pulsa Espacio para volver al menú.");
         }
 
-        if (gameWin && juegoIniciado && Input.GetKeyDown(KeyCode.Space))
+        if (PartidaFinalizada() && PulsadoEspacio())
         {
-            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-
-            SceneManager.LoadScene(currentSceneIndex);
-        }
-
-        if (gameOver && juegoIniciado && Input.GetKeyDown(KeyCode.Space))
-        {
-            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-
-            SceneManager.LoadScene(currentSceneIndex);
+            CargaEscenaActual();
         }
 
         if (juegoIniciado && reloj.tiempoJuego.dia > diasTopeJuego && !reloj.pantallaNegra && !gameOver)
@@ -95,16 +79,14 @@ public class Menu : MonoBehaviour
 
             trabajando.zona.control.pausaDeteccion = true;
 
-            panelMensaje.SetActive(true);
-            panelMensaje.GetComponentInChildren<TextMeshProUGUI>().text = $"Tu progreso del juego llegó al :{barraProgreso.vida.porcentaje.ToString()}%\r\n\r\nPulsa Espacio para volver al menú.";
+            MuestraMensaje($"Tu progreso del juego llegó al :{barraProgreso.vida.porcentaje.ToString()}%\r\n\r\nPulsa Espacio para volver al menú.");
         }
 
         if (juegoIniciado && trabajando.haGanado && !gameWin)
         {
             panelPartida.SetActive(false);
 
-            panelMensaje.SetActive(true);
-            panelMensaje.GetComponentInChildren<TextMeshProUGUI>().text = "Pulsa Espacio para volver al menú.";
+            MuestraMensaje("Pulsa Espacio para volver al menú.");
 
             panelVictoria.SetActive(true);
             jugador.Pausar();
@@ -113,11 +95,57 @@ public class Menu : MonoBehaviour
             string diaOdia = reloj.tiempoJuego.dia == 1 ? "día" : "días";
             string horaOs = reloj.tiempoJuego.hora == 1 ? "hora" : "horas";
             string minOs = reloj.tiempoJuego.minuto == 1 ? "minuto" : "minutos";
-            string tiempoJuego = $"¡Has logrado acabar tu juego!\r\nEn {reloj.tiempoJuego.dia-1} {diaOdia}," +
+            string tiempoJuego = $"¡Has logrado acabar tu juego!\r\nEn {reloj.tiempoJuego.dia - 1} {diaOdia}," +
                 $" {reloj.tiempoJuego.hora:D2} {horaOs} y {reloj.tiempoJuego.minuto:D2} {minOs}.\r\nCon un total de {trabajando.teclasPulsadas} acciones.";
             textoResultado.text = tiempoJuego;
 
             gameWin = true;
         }
+    }
+
+    private static void CargaEscenaActual()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private static bool PulsadoEspacio()
+    {
+        return Input.GetKeyDown(KeyCode.Space);
+    }
+
+    private void MuestraMensaje(string mensaje)
+    {
+        panelMensaje.SetActive(true);
+        panelMensaje.GetComponentInChildren<TextMeshProUGUI>().text = mensaje;
+    }
+
+    private bool PartidaGanada()
+    {
+        return gameWin && juegoIniciado;
+    }
+
+    private bool PartidaPerdida()
+    {
+        return gameOver && juegoIniciado;
+    }
+
+    private bool PartidaFinalizada()
+    {
+        return PartidaGanada() || PartidaPerdida();
+    }
+
+    private void IniciarPartida()
+    {
+        juegoIniciado = true;
+        menuInicial.SetActive(false);
+        MuestraMensaje("Es hora de programar ve al ordenador.\r\n\r\nUtiliza W,A,S,D para moverte y el ratón para girar.");
+        jugador.Iniciar();
+        reloj.Iniciar();
+        panelPartida.SetActive(true);
+    }
+
+    private bool PulsadoTeclaParaIniciar()
+    {
+        return !juegoIniciado && Input.anyKeyDown;
     }
 }
