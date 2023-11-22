@@ -29,18 +29,10 @@ public class AccionTrabajar : AccionBase
     {
         haGanado = false;
         teclasPulsadas = 0;
-
         audioSource = GetComponent<AudioSource>();
 
-        if (sonidoAEjecutar == null)
-        {
-            Debug.LogError("No se ha asignado un AudioClip para reproducir.");
-        }
-
-        if (audioSource == null)
-        {
-            Debug.LogError("AudioSource no encontrado");
-        }
+        if (sonidoAEjecutar == null) Debug.LogError("No se ha asignado un AudioClip para reproducir.");        
+        if (audioSource == null) Debug.LogError("AudioSource no encontrado");        
     }
 
     void Update()
@@ -49,43 +41,35 @@ public class AccionTrabajar : AccionBase
         {
             if (RealizaUnaAccion())
             {
-                teclasPulsadas++;
-
-                zona.colision.mensajeZona = mensajeInteraccion;
-
                 RealizandoAccion();
             }
             else
             {
-                teclasPulsadas += PulsaTeclaAccion() ? 1 : 0;
-
-                zona.colision.mensajeZona = condicion.AlgunEstadoAlMaximo() ? GeneraMensaje() : mensajeInteraccion;
+                MuestraMensaje();
             }
-        }
-        
+        }        
         objetoAnimado.AnimacionAgrandar();
-
         ControlPantallaEnZona();
+    }
+
+    private void MuestraMensaje()
+    {
+        teclasPulsadas += PulsaTeclaAccion() ? 1 : 0;
+        zona.colision.mensajeZona = condicion.AlgunEstadoAlMaximo() ? GeneraMensaje() : mensajeInteraccion;
     }
 
     private void RealizandoAccion()
     {
+        teclasPulsadas++;
+        zona.colision.mensajeZona = mensajeInteraccion;
         reloj.AumentaTiempo(costeTiempo);
         condicion.CambioEstado(beneficios);
-        if (objetoAnimado.DestacadoNoEstaEnTransicion()) objetoAnimado.IniciaTransicion();
-        
+        if (objetoAnimado.DestacadoNoEstaEnTransicion()) objetoAnimado.IniciaTransicion();        
         audioSource.PlayOneShot(sonidoAEjecutar);
-
         ReproduceClip();
-
         barraProgreso.vida.actual += incremento + Random.Range(0, incremento);
-
         GeneraParticula();
-
-        if (Victoria())
-        {
-            PantallaFinalBueno();
-        }
+        if (Victoria()) PantallaFinalBueno();      
     }
 
     private bool RealizaUnaAccion()
@@ -100,8 +84,7 @@ public class AccionTrabajar : AccionBase
 
     private void GeneraParticula()
     {
-        ParticleSystem nuevaParticula = Instantiate(particlePrefab, posicionParticulas, Quaternion.identity);
-        nuevaParticula.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+        ParticleSystem nuevaParticula = Instantiate(particlePrefab, posicionParticulas, Quaternion.Euler(-90f, 0f, 0f));
         Destroy(nuevaParticula.gameObject, 1.1f);
     }
 
@@ -126,7 +109,6 @@ public class AccionTrabajar : AccionBase
         mensaje += condicion.ObtenerMensajeCondicion(", estoy cansado", condicion.CansancioAlMaximo());
         mensaje += condicion.ObtenerMensajeCondicion(", me estoy estresando", condicion.EstresAlMaximo());
         mensaje += ", no puedo continuar.";
-
         return mensaje;
     }
 

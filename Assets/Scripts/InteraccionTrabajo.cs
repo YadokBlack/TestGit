@@ -96,11 +96,11 @@ public class InteraccionTrabajo : MonoBehaviour
             panel.SetActive(true);
             textMeshPro.text = mensajeInteraccion;
 
-            if (Input.GetKeyDown(teclaInteraccion) && 
-                    condicion.sed.valor < lleno && 
-                    condicion.cansancio.valor < lleno &&
-                    condicion.estres.valor < lleno && 
-                    condicion.hambre.valor < lleno)
+            if (Input.GetKeyDown(teclaInteraccion) &&
+                    condicion.listadoEstados.estados[(int)PosiblesEstados.Sed].valor < lleno && 
+                    condicion.listadoEstados.estados[(int)PosiblesEstados.Cansancio].valor < lleno &&
+                    condicion.listadoEstados.estados[(int)PosiblesEstados.Estres].valor < lleno && 
+                    condicion.listadoEstados.estados[(int)PosiblesEstados.Hambre].valor < lleno)
             {
                 if (audioSource != null && sonidoAEjecutar != null)
                 {
@@ -136,24 +136,26 @@ public class InteraccionTrabajo : MonoBehaviour
             }
             else             
             {
-                if (condicion.hambre.valor == lleno || condicion.sed.valor == lleno
-                    || condicion.cansancio.valor == lleno || condicion.estres.valor == lleno)
+                if (condicion.listadoEstados.estados[(int)PosiblesEstados.Hambre].valor == lleno ||
+                    condicion.listadoEstados.estados[(int)PosiblesEstados.Sed].valor == lleno ||
+                    condicion.listadoEstados.estados[(int)PosiblesEstados.Cansancio].valor == lleno ||
+                    condicion.listadoEstados.estados[(int)PosiblesEstados.Estres].valor == lleno)
                 {
                     textMeshPro.text = "Uf";
 
-                    if (condicion.hambre.valor == lleno)
+                    if (condicion.listadoEstados.estados[(int)PosiblesEstados.Hambre].valor == lleno)
                     {
                         textMeshPro.text += ", tengo hambre";
                     }
-                    if (condicion.sed.valor == lleno)
+                    if (condicion.listadoEstados.estados[(int)PosiblesEstados.Sed].valor == lleno)
                     {
                         textMeshPro.text += ", estoy sediento";
                     }
-                    if (condicion.cansancio.valor == lleno)
+                    if (condicion.listadoEstados.estados[(int)PosiblesEstados.Cansancio].valor == lleno)
                     {
                         textMeshPro.text += ", estoy cansado";
                     }
-                    if (condicion.estres.valor == lleno)
+                    if (condicion.listadoEstados.estados[(int)PosiblesEstados.Estres].valor == lleno)
                     {
                         textMeshPro.text += ", me estoy estresando";
                     }

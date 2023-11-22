@@ -11,8 +11,9 @@ public class ColorGradientScript : MonoBehaviour
 
     public Condicion condicion;
     [SerializeField]
-    private Estados estados; 
+    private PosiblesEstados estados; 
 
+    /*
     private enum Estados
     {
         Sed,
@@ -20,6 +21,7 @@ public class ColorGradientScript : MonoBehaviour
         Cansancio,
         Estres
     }
+    */
 
     private void Update()
     {
@@ -27,17 +29,17 @@ public class ColorGradientScript : MonoBehaviour
 
         switch (estados)
         {
-            case Estados.Sed:
-                proportion = Mathf.Clamp01(condicion.sed.valor / maxValue);
+            case PosiblesEstados.Sed:
+                proportion = Mathf.Clamp01(condicion.listadoEstados.estados[(int)PosiblesEstados.Sed].valor / maxValue);
                 break;
-            case Estados.Comida:
-                proportion = Mathf.Clamp01(condicion.hambre.valor / maxValue);
+            case PosiblesEstados.Hambre:
+                proportion = Mathf.Clamp01(condicion.listadoEstados.estados[(int)PosiblesEstados.Hambre].valor / maxValue);
                 break;
-            case Estados.Cansancio:
-                proportion = Mathf.Clamp01(condicion.cansancio.valor / maxValue);
+            case PosiblesEstados.Cansancio:
+                proportion = Mathf.Clamp01(condicion.listadoEstados.estados[(int)PosiblesEstados.Cansancio].valor / maxValue);
                 break;
-            case Estados.Estres:
-                proportion = Mathf.Clamp01(condicion.estres.valor / maxValue);
+            case PosiblesEstados.Estres:
+                proportion = Mathf.Clamp01(condicion.listadoEstados.estados[(int)PosiblesEstados.Estres].valor / maxValue);
                 break;
         }
 

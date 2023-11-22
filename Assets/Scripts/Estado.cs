@@ -13,6 +13,7 @@ public class Estado
     public Image fondo;
     public float altura;
     public float tiempoEntreCambio;
+    public float tiempoUltimoCambio;
 
     public void ActualizaBarra()
     {

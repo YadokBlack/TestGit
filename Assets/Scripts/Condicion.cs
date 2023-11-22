@@ -1,186 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class Condicion : MonoBehaviour
 {
-    const int valorMaximo = 100;
-
-    public Estado estres;
-    public Estado hambre;
-    public Estado sed;
-    public Estado cansancio;
-    private float tiempoUltimoCambioEstres;
-    private float tiempoUltimoCambioHambre;
-    private float tiempoUltimoCambioSed;
-    private float tiempoUltimoCambioCansancio;
-
+    public ListaEstados listadoEstados;
     public PasoDelTiempo reloj;
-
-    public float aumentoAleatorio;
-
+    
     private void Awake()
     {
-        InicializaEstadoValor();
-
-        InicializaAlturas();
-
-        Debug.Log(" C" + cansancio.altura + " E" + estres.altura + " S" + sed.altura + " H" + hambre.altura);
-
-        InicializaTiempoEstados();
-    }
-
-    private void InicializaEstadoValor()
-    {
-        hambre.valor = 0;
-        sed.valor = 0;
-        InicializaCansancioYEstres();
-    }
-
-    private void InicializaCansancioYEstres()
-    {
-        cansancio.valor = 0.0f;
-        estres.valor = 0.0f;
-    }
-
-    private void InicializaAlturas()
-    {
-        cansancio.altura = cansancio.fondo.rectTransform.rect.height;
-        estres.altura = estres.fondo.rectTransform.rect.height;
-        sed.altura = sed.fondo.rectTransform.rect.height;
-        hambre.altura = hambre.fondo.rectTransform.rect.height;
-    }
-
-    private void InicializaTiempoEstados()
-    {
-        tiempoUltimoCambioEstres = Time.time;
-        tiempoUltimoCambioHambre = Time.time;
-        tiempoUltimoCambioSed = Time.time;
-        tiempoUltimoCambioCansancio = Time.time;
+        listadoEstados.InicializarEstados();
     }
 
     private void Update()
     {        
-        if (reloj.pantallaNegra) InicializaCansancioYEstres();
+        if (reloj.pantallaNegra) listadoEstados.InicializaCansancioYEstres();
 
-        ActualizaBarrasEstados();
+        listadoEstados.ActualizarBarras();
     }
 
-    private void IncrementaEstados()
-    {
-        float tiempoActual = Time.time;
-        if (EsHoraDeCambiarEstres(tiempoActual)) IncrementaEstres(tiempoActual);
-        if (EsHoraDeCambiarHambre(tiempoActual)) IncrementaHambre(tiempoActual);
-        if (EsHoraDeCambiarSed(tiempoActual)) IncrementaSed(tiempoActual);
-        if (EsHoraDeCambiarCansancio(tiempoActual)) IncrementaCansancio(tiempoActual);
-    }
-
-    private void ActualizaBarrasEstados()
-    {
-        IncrementaEstados();
-
-        AcotarEstados();
-
-        sed.ActualizaBarra();
-        hambre.ActualizaBarra();
-        cansancio.ActualizaBarra();
-        estres.ActualizaBarra();
-    }
-
-    private bool EsHoraDeCambiarSed(float tiempoActual)
-    {
-        return tiempoActual - tiempoUltimoCambioSed >= sed.tiempoEntreCambio;
-    }
-
-    private bool EsHoraDeCambiarEstres(float tiempoActual)
-    {
-        return tiempoActual - tiempoUltimoCambioEstres >= estres.tiempoEntreCambio;
-    }
-
-    private bool EsHoraDeCambiarHambre(float tiempoActual)
-    {
-        return tiempoActual - tiempoUltimoCambioHambre >= hambre.tiempoEntreCambio;
-    }
-
-    private bool EsHoraDeCambiarCansancio(float tiempoActual)
-    {
-        return tiempoActual - tiempoUltimoCambioCansancio >= cansancio.tiempoEntreCambio;
-    }
-
-    private void IncrementaSed(float tiempoActual)
-    {
-        sed.valor += 1 + Random.Range(0.1f, aumentoAleatorio);
-        tiempoUltimoCambioSed = tiempoActual;
-    }
-
-    private void IncrementaHambre(float tiempoActual)
-    {
-        hambre.valor += 1 + Random.Range(0.1f, aumentoAleatorio);
-        tiempoUltimoCambioHambre = tiempoActual;
-    }
-
-    private void IncrementaEstres(float tiempoActual)
-    {
-        estres.valor += 1 + Random.Range(0.1f, aumentoAleatorio);
-        tiempoUltimoCambioEstres = tiempoActual;
-    }
-
-    private void IncrementaCansancio(float tiempoActual)
-    {
-        cansancio.valor += 1 + Random.Range(0.1f, aumentoAleatorio);
-        tiempoUltimoCambioCansancio = tiempoActual;
-    }
 
     public void CambioEstado(float[] beneficios)
     {
-        if ( beneficios != null && beneficios.Length == 4)
-        {
-            estres.valor += beneficios[0];
-            hambre.valor += beneficios[1];
-            sed.valor += beneficios[2];
-            cansancio.valor += beneficios[3];
-
-            AcotarEstados();
-        }
+        if (BeneficiosCorrectoTamanyo(beneficios)) listadoEstados.AsignarValorEstados(beneficios);        
     }
 
-    private void AcotarEstados()
+    private bool BeneficiosCorrectoTamanyo(float[] beneficios)
     {
-        estres.valor = Mathf.Clamp(estres.valor, 0, 100);
-        hambre.valor = Mathf.Clamp(hambre.valor, 0, 100);
-        sed.valor = Mathf.Clamp(sed.valor, 0, 100);
-        cansancio.valor = Mathf.Clamp(cansancio.valor, 0, 100);
-    }
-
-    public bool AlgunEstadoAlMaximo()
-    {
-        return HambreAlMaximo() || SedAlMaximo() || CansancioAlMaximo() || EstresAlMaximo();
-    }
-
-    public bool HambreAlMaximo()
-    {
-        return hambre.valor == valorMaximo;
-    }
-
-    public bool EstresAlMaximo()
-    {
-        return estres.valor == valorMaximo;
-    }
-
-    public bool CansancioAlMaximo()
-    {
-        return cansancio.valor == valorMaximo;
-    }
-
-    public bool SedAlMaximo()
-    {
-        return sed.valor == valorMaximo;
+        return beneficios != null && beneficios.Length == 4;
     }
 
     public string ObtenerMensajeCondicion(string mensaje, bool condicion)
     {
         return condicion ? mensaje : string.Empty;
     }
+
+    public bool AlgunEstadoAlMaximo()
+    {
+        return HambreAlMaximo() || SedAlMaximo() || CansancioAlMaximo() || EstresAlMaximo();
+    }
+    
+
+    public bool HambreAlMaximo()
+    {
+        return listadoEstados.EstadoAlMaximo(PosiblesEstados.Hambre);
+    }
+
+    public bool EstresAlMaximo()
+    {
+        return listadoEstados.EstadoAlMaximo(PosiblesEstados.Estres);
+    }
+
+    public bool CansancioAlMaximo()
+    {
+        return listadoEstados.EstadoAlMaximo(PosiblesEstados.Cansancio);
+    }
+
+    public bool SedAlMaximo()
+    {
+        return listadoEstados.EstadoAlMaximo(PosiblesEstados.Sed);
+    }    
 }
